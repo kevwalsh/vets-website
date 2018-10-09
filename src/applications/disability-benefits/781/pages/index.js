@@ -24,6 +24,11 @@ import {
 } from './ptsdSecondaryChoice';
 
 import {
+  uiSchema as individualsInvolvedChoiceUISchema,
+  schema as individualsInvolvedChoiceSchema,
+} from './individualsInvolvedChoice';
+
+import {
   uiSchema as ptsdSecondaryIncidentDateUISchema,
   schema as ptsdSecondaryIncidentDateSchema,
 } from './ptsdSecondaryIncidentDate';
@@ -91,6 +96,11 @@ export const uploadPtsd = {
 export const uploadPtsdSecondary = {
   uiSchema: ptsd781aUISchema,
   schema: ptsd781aSchema,
+};
+
+export const individualsInvolvedChoice = {
+  uiSchema: individualsInvolvedChoiceUISchema,
+  schema: individualsInvolvedChoiceSchema,
 };
 
 export const informationInterviewCombat = {

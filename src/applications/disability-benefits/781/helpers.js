@@ -171,7 +171,13 @@ export const documentDescription = () => (
   </div>
 );
 
-const UploadExplanation = ({ formType }) => (
+export const individualsInvolvedTitle = () => (
+  <legend className="schemaform-block-title schemaform-title-underline">
+    PTSD: Individuals Involved
+  </legend>
+);
+
+export const UploadExplanation = ({ formType }) => (
   <div>
     <p>
       If you have already completed a Claim for Service Connection for
