@@ -24,6 +24,11 @@ import {
 } from './ptsdSecondaryChoice';
 
 import {
+  uiSchema as individualsInvolvedChoiceUISchema,
+  schema as individualsInvolvedChoiceSchema,
+} from './individualsInvolvedChoice';
+
+import {
   uiSchema as ptsdSecondaryIncidentDateUISchema,
   schema as ptsdSecondaryIncidentDateSchema,
 } from './ptsdSecondaryIncidentDate';
@@ -42,6 +47,11 @@ import {
   uiSchema as informationInterviewCombatUISchema,
   schema as informationInterviewCombatSchema,
 } from './informationInterviewCombat';
+
+import {
+  uiSchema as stressfulIncSecDescUISchema,
+  schema as stressfulIncSecDescSchema,
+} from './stressfulIncSecDesc';
 
 import {
   uiSchema as informationInterviewAssaultUISchema,
@@ -88,6 +98,11 @@ export const uploadPtsdSecondary = {
   schema: ptsd781aSchema,
 };
 
+export const individualsInvolvedChoice = {
+  uiSchema: individualsInvolvedChoiceUISchema,
+  schema: individualsInvolvedChoiceSchema,
+};
+
 export const informationInterviewCombat = {
   uiSchema: informationInterviewCombatUISchema,
   schema: informationInterviewCombatSchema,
@@ -96,4 +111,9 @@ export const informationInterviewCombat = {
 export const informationInterviewAssault = {
   uiSchema: informationInterviewAssaultUISchema,
   schema: informationInterviewAssaultSchema,
+};
+
+export const stressfulIncSecDesc = {
+  uiSchema: stressfulIncSecDescUISchema,
+  schema: stressfulIncSecDescSchema,
 };

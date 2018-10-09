@@ -178,7 +178,13 @@ export const documentDescription = () => (
   </div>
 );
 
-const UploadExplanation = ({ formType }) => (
+export const individualsInvolvedTitle = () => (
+  <legend className="schemaform-block-title schemaform-title-underline">
+    PTSD: Individuals Involved
+  </legend>
+);
+
+export const UploadExplanation = ({ formType }) => (
   <div>
     <p>
       If you have already completed a Claim for Service Connection for
@@ -206,7 +212,7 @@ export const UploadPtsdDescription = ({ formData, formType }) => {
   );
 };
 
-export const IncidentIntroduction781 = ({ formData, formType }) => {
+export const IncidentIntroduction = ({ formData, formType }) => {
   const { incidentTitle } = getPtsdClassification(formData, formType);
   return (
     <div>
@@ -265,3 +271,8 @@ export function locationSchemas() {
     },
   };
 }
+export const stressfulIncidentDescriptionTitle = () => (
+  <div>
+    <h5>Event description</h5>
+  </div>
+);

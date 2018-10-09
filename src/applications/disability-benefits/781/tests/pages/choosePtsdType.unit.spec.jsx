@@ -15,7 +15,7 @@ describe('Disability benefits 718 PTSD type', () => {
     schema,
     uiSchema,
     arrayPath,
-  } = formConfig.chapters.introductionPage.pages.ptsdType;
+  } = formConfig.chapters.disabilityDetails.pages.ptsdType;
 
   it('renders ptsd type form', () => {
     const onSubmit = sinon.spy();
@@ -28,7 +28,8 @@ describe('Disability benefits 718 PTSD type', () => {
         schema={schema}
         data={initialData}
         formData={initialData}
-        uiSchema={uiSchema}/>,
+        uiSchema={uiSchema}
+      />,
     );
 
     expect(form.find('input').length).to.equal(4);
@@ -45,7 +46,8 @@ describe('Disability benefits 718 PTSD type', () => {
         schema={schema}
         data={initialData}
         formData={initialData}
-        uiSchema={uiSchema}/>,
+        uiSchema={uiSchema}
+      />,
     );
 
     selectCheckbox(
@@ -85,7 +87,8 @@ describe('Disability benefits 718 PTSD type', () => {
         schema={schema}
         data={initialData}
         formData={initialData}
-        uiSchema={uiSchema}/>,
+        uiSchema={uiSchema}
+      />,
     );
 
     expect(form.find('.usa-input-error-message').length).to.equal(0);

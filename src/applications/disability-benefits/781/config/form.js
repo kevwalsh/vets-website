@@ -21,11 +21,13 @@ import {
   ptsdSecondaryChoice,
   uploadPtsd,
   uploadPtsdSecondary,
+  individualsInvolvedChoice,
   ptsdSecondaryIncidentDate,
   ptsdSecondaryAssignmentDetails,
   ptsdSecondaryLocation,
   informationInterviewCombat,
   informationInterviewAssault,
+  stressfulIncSecDesc,
 } from '../pages';
 
 const formConfig = {
@@ -57,24 +59,39 @@ const formConfig = {
             properties: {},
           },
         },
+      },
+    },
+    disabilityDetails: {
+      title: 'Disability Details',
+      pages: {
         ptsdType: {
+          title: 'PTSD Type',
           path: 'ptsdType',
-          title: 'Disability Details',
           uiSchema: ptsdType.uiSchema,
           schema: ptsdType.schema,
         },
         ptsdChoice: {
+          title: 'PTSD Choice',
           path: 'ptsdChoice',
-          title: 'Disability Details',
           depends: form =>
             form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
             form['view:selectablePtsdTypes']['view:noncombatPtsdType'],
           uiSchema: ptsdChoice.uiSchema,
           schema: ptsdChoice.schema,
         },
+        individualsInvolvedChoice: {
+          title: 'Individuals Involved Choice',
+          path: 'individualsInvolvedChoice',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
+          uiSchema: individualsInvolvedChoice.uiSchema,
+          schema: individualsInvolvedChoice.schema,
+        },
         uploadPtsd: {
+          title: 'Upload PTSD',
           path: 'upload-781',
-          title: 'Disability Details',
           depends: form =>
             form['view:uploadPtsdChoice'] === 'upload' &&
             (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
@@ -83,8 +100,8 @@ const formConfig = {
           schema: uploadPtsd.schema,
         },
         informationInterviewCombat: {
+          title: 'Information Interview Combat',
           path: 'information-781',
-          title: 'Disability Details',
           depends: form =>
             form['view:uploadPtsdChoice'] === 'answerQuestions' &&
             (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
@@ -93,8 +110,8 @@ const formConfig = {
           schema: informationInterviewCombat.schema,
         },
         ptsdSecondaryChoice: {
+          title: 'PTSD Secondary Choice',
           path: 'ptsdSecondaryChoice',
-          title: 'Disability Details',
           depends: form =>
             form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
             form['view:selectablePtsdTypes']['view:assaultPtsdType'],
@@ -102,8 +119,8 @@ const formConfig = {
           schema: ptsdSecondaryChoice.schema,
         },
         informationInterviewAssault: {
+          title: 'Information Interview Assault',
           path: 'information-781a',
-          title: 'Disability Details',
           depends: form =>
             form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
             (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
@@ -124,7 +141,6 @@ const formConfig = {
             green: true,
           },
         },
-
         ptsdSecondaryAssignmentDetails: {
           path: 'ptsdSecondaryAssignmentDetails',
           title: 'Disability Details',
@@ -146,14 +162,19 @@ const formConfig = {
           schema: ptsdSecondaryLocation.schema,
         },
         uploadPtsdSecondary: {
+          title: 'Upload PTSD Secondary',
           path: 'upload-781a',
-          title: 'Disability Details',
           depends: form =>
             form['view:uploadPtsdSecondaryChoice'] === 'upload' &&
             (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
               form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: uploadPtsdSecondary.uiSchema,
           schema: uploadPtsdSecondary.schema,
+        },
+        stressfulIncidentSecondaryDescription: {
+          path: 'stressful-incident-secondary-description',
+          uiSchema: stressfulIncSecDesc.uiSchema,
+          schema: stressfulIncSecDesc.schema,
         },
         // medals: { //TODO: KEEP FOR NEXT STORY
         //   path: 'information-781',
