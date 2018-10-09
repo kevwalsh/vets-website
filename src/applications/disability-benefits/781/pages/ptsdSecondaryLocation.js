@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PtsdNameTitle } from '../helpers';
+import { PtsdNameTitle, locationSchemas } from '../helpers';
 
 const ptsdLocationDescription = () => (
   <div>
@@ -13,37 +13,32 @@ const ptsdLocationDescription = () => (
   </div>
 );
 
+const { addressUI, addressSchema } = locationSchemas();
+
 export const uiSchema = {
   'ui:title': PtsdNameTitle,
   'ui:description': ptsdLocationDescription,
-  secondaryIncidentCountry: {
-    'ui:title': 'Country',
-  },
-  secondaryIncidentState: {
-    'ui:title': 'State/Province',
-  },
-  secondaryIncidentCity: {
-    'ui:title': 'City',
-  },
-  secondaryIncidentLandMark: {
-    'ui:title': 'Landmark or Military Installation',
+  secondaryIncidentLocation: {
+    ...addressUI,
+    additionalDetails: {
+      'ui:title': 'Additional details', // Currently only on 781a, keeping here for now.
+      'ui:widget': 'textarea',
+    },
+    'ui:order': [...addressUI['ui:order'], 'additionalDetails'],
   },
 };
 
 export const schema = {
   type: 'object',
   properties: {
-    secondaryIncidentCountry: {
-      type: 'string',
-    },
-    secondaryIncidentState: {
-      type: 'string',
-    },
-    secondaryIncidentCity: {
-      type: 'string',
-    },
-    secondaryIncidentLandMark: {
-      type: 'string',
+    secondaryIncidentLocation: {
+      ...addressSchema,
+      properties: {
+        ...addressSchema.properties,
+        additionalDetails: {
+          type: 'string',
+        },
+      },
     },
   },
 };

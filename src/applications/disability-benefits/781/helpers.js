@@ -1,5 +1,12 @@
 import React from 'react';
+import { omit } from 'lodash';
 import AdditionalInfo from '@department-of-veterans-affairs/formation/AdditionalInfo';
+
+import fullSchema781 from './21-0781-schema.json';
+import {
+  schema as addressSchema,
+  uiSchema as addressUI,
+} from '../../../platform/forms/definitions/address';
 
 export const getPtsdClassification = (formData, formType) => {
   const classifications = formData['view:selectablePtsdTypes'];
@@ -225,69 +232,36 @@ export const ptsdChoiceDescription = (
   </AdditionalInfo>
 );
 
-export const stateNames = [
-  'Alabama',
-  'U.S. Minor Outlying Islands',
-  'American Samoa',
-  'Arizona',
-  'Arkansas',
-  'Armed Forces Americas (AA)',
-  'Armed Forces Europe (AE)',
-  'Armed Forces Pacific (AP)',
-  'California',
-  'Colorado',
-  'Connecticut',
-  'Delaware',
-  'District Of Columbia',
-  'Federated States Of Micronesia',
-  'Florida',
-  'Georgia',
-  'Guam',
-  'Hawaii',
-  'Idaho',
-  'Illinois',
-  'Indiana',
-  'Iowa',
-  'Kansas',
-  'Kentucky',
-  'Louisiana',
-  'Maine',
-  'Marshall Islands',
-  'Maryland',
-  'Massachusetts',
-  'Michigan',
-  'Minnesota',
-  'Mississippi',
-  'Alaska',
-  'Montana',
-  'Nebraska',
-  'Nevada',
-  'New Hampshire',
-  'New Jersey',
-  'New Mexico',
-  'New York',
-  'North Carolina',
-  'North Dakota',
-  'Northern Mariana Islands',
-  'Ohio',
-  'Oklahoma',
-  'Oregon',
-  'Palau',
-  'Pennsylvania',
-  'Puerto Rico',
-  'Rhode Island',
-  'South Carolina',
-  'South Dakota',
-  'Tennessee',
-  'Texas',
-  'Utah',
-  'Vermont',
-  'Virgin Islands',
-  'Virginia',
-  'Washington',
-  'West Virginia',
-  'Wisconsin',
-  'Wyoming',
-  'Philippine Islands',
-  'Missouri',
-];
+export function locationSchemas() {
+  const addressOmitions = ['street', 'street2', 'street3', 'postalCode'];
+  const addressSchemaConfig = addressSchema(fullSchema781);
+  const addressUIConfig = omit(addressUI(' '), addressOmitions);
+  return {
+    addressUI: {
+      ...addressUIConfig,
+      state: {
+        ...addressUIConfig.state,
+        'ui:title': 'State/Province',
+      },
+      incidentLandMark: {
+        'ui:title': 'Landmark or Military Installation',
+      },
+      'ui:order': [
+        'country',
+        'city',
+        'state',
+        'incidentLandMark',
+        'additionalDetails',
+      ],
+    },
+    addressSchema: {
+      ...addressSchemaConfig,
+      properties: {
+        ...omit(addressSchemaConfig.properties, addressOmitions),
+        incidentLandMark: {
+          type: 'string',
+        },
+      },
+    },
+  };
+}
