@@ -5,12 +5,13 @@
 
 import IntroductionPage from '../containers/IntroductionPage';
 import ConfirmationPage from '../containers/ConfirmationPage';
+import FormFooter from '../../../../platform/forms/components/FormFooter';
 
 // const { } = fullSchema.properties;
 
 // const { } = fullSchema.definitions;
 
-import { introductionText } from '../helpers';
+import { introductionText, GetFormHelp } from '../helpers';
 
 // Define all the fields in the form to aid reuse
 // const formFields = {};
@@ -39,6 +40,8 @@ const formConfig = {
   formId: '1234',
   version: 0,
   prefillEnabled: true,
+  footerContent: FormFooter,
+  getHelp: GetFormHelp,
   savedFormMessages: {
     notFound: 'Please start over to apply for benefits.',
     noAuth: 'Please sign in again to continue your application for benefits.',
