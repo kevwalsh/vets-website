@@ -16,7 +16,7 @@ describe('781 helpers', () => {
       expect(addressUI).to.not.have.property('street3');
       expect(addressUI).to.not.have.property('postalCode');
     });
-    it('should exclude street address inputs from  schema', () => {
+    it('should exclude street address properties from schema', () => {
       const { addressSchema } = locationSchemas();
       expect(addressSchema.properties).to.not.have.property('street');
       expect(addressSchema.properties).to.not.have.property('street2');
