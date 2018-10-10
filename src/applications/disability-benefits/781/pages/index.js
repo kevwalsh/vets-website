@@ -35,6 +35,11 @@ import {
 
 import { uiSchema as medalsUISchema, schema as medalsSchema } from './medals';
 
+import {
+  uiSchema as incidentDateCombatUISchema,
+  schema as incidentDateCombatSchema,
+} from './incidentDateCombat';
+
 export const ptsdType = {
   uiSchema: ptsdTypeUISchema,
   schema: ptsdTypeSchema,
@@ -73,4 +78,9 @@ export const informationInterviewAssault = {
 export const medals = {
   uiSchema: medalsUISchema,
   schema: medalsSchema,
+};
+
+export const incidentDateCombat = {
+  uiSchema: incidentDateCombatUISchema,
+  schema: incidentDateCombatSchema,
 };

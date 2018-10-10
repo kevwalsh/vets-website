@@ -24,6 +24,7 @@ import {
   medals,
   informationInterviewCombat,
   informationInterviewAssault,
+  incidentDateCombat,
 } from '../pages';
 
 const formConfig = {
@@ -128,6 +129,16 @@ const formConfig = {
               form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
           uiSchema: medals.uiSchema,
           schema: medals.schema,
+        },
+        incidentDateCombat: {
+          path: 'incidentDateCombat',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
+          uiSchema: incidentDateCombat.uiSchema,
+          schema: incidentDateCombat.schema,
         },
       },
     },
