@@ -5,14 +5,15 @@ import { mount } from 'enzyme';
 
 import {
   DefinitionTester,
-  fillDate,
+  fillData,
 } from '../../../../../platform/testing/unit/schemaform-utils';
 import formConfig from '../../config/form';
 
-describe('781a Incident Date', () => {
+describe('781a Event location', () => {
   const page =
-    formConfig.chapters.disabilityDetails.pages.ptsdSecondaryIncidentDate;
+    formConfig.chapters.disabilityDetails.pages.ptsdSecondaryLocation;
   const { schema, uiSchema, arrayPath } = page;
+
   it('should render', () => {
     const form = mount(
       <DefinitionTester
@@ -26,14 +27,14 @@ describe('781a Incident Date', () => {
           },
         }}
         uiSchema={uiSchema}
-        formData={{}}
       />,
     );
     expect(form.find('input').length).to.equal(1);
     expect(form.find('select').length).to.equal(2);
+    expect(form.find('textarea').length).to.equal(1);
   });
 
-  it('should fill in incident date', () => {
+  it('should fill in event location details', () => {
     const onSubmit = sinon.spy();
     const form = mount(
       <DefinitionTester
@@ -48,17 +49,23 @@ describe('781a Incident Date', () => {
           },
         }}
         uiSchema={uiSchema}
-        formData={{}}
       />,
     );
 
-    fillDate(form, 'root_secondaryIncidentDate', '2016-07-10');
-    form.find('form').simulate('submit');
+    fillData(form, 'select#root_secondaryIncidentLocation_country', 'USA');
+    fillData(form, 'input#root_secondaryIncidentLocation_city', 'San Diego');
+    fillData(form, 'select#root_secondaryIncidentLocation_state', 'CA');
+    fillData(
+      form,
+      'textarea#root_secondaryIncidentLocation_additionalDetails',
+      'It was near the cannons, on the southeast side.',
+    );
 
+    form.find('form').simulate('submit');
     expect(form.find('.usa-input-error-message').length).to.equal(0);
     expect(onSubmit.called).to.be.true;
   });
-  it('should allow submission if no incident date submitted', () => {
+  it('should allow submission if no event location details are submitted', () => {
     const onSubmit = sinon.spy();
     const form = mount(
       <DefinitionTester
@@ -72,7 +79,6 @@ describe('781a Incident Date', () => {
             'view:assaultPtsdType': true,
           },
         }}
-        formData={{}}
         uiSchema={uiSchema}
       />,
     );

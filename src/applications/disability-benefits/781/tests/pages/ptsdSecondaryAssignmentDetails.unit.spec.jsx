@@ -12,7 +12,7 @@ import formConfig from '../../config/form';
 
 describe('781a Incident Date', () => {
   const page =
-    formConfig.chapters.introductionPage.pages.ptsdSecondaryAssignmentDetails;
+    formConfig.chapters.disabilityDetails.pages.ptsdSecondaryAssignmentDetails;
   const { schema, uiSchema, arrayPath } = page;
 
   it('should render', () => {
@@ -22,8 +22,13 @@ describe('781a Incident Date', () => {
         pagePerItemIndex={0}
         definitions={formConfig.defaultDefinitions}
         schema={schema}
-        data={{}}
+        data={{
+          'view:selectablePtsdTypes': {
+            'view:assaultPtsdType': true,
+          },
+        }}
         uiSchema={uiSchema}
+        formData={{}}
       />,
     );
     expect(form.find('input').length).to.equal(3);
@@ -39,8 +44,13 @@ describe('781a Incident Date', () => {
         onSubmit={onSubmit}
         definitions={formConfig.defaultDefinitions}
         schema={schema}
-        data={{}}
+        data={{
+          'view:selectablePtsdTypes': {
+            'view:assaultPtsdType': true,
+          },
+        }}
         uiSchema={uiSchema}
+        formData={{}}
       />,
     );
 
@@ -61,8 +71,13 @@ describe('781a Incident Date', () => {
         onSubmit={onSubmit}
         definitions={formConfig.defaultDefinitions}
         schema={schema}
-        data={{}}
+        data={{
+          'view:selectablePtsdTypes': {
+            'view:assaultPtsdType': true,
+          },
+        }}
         uiSchema={uiSchema}
+        formData={{}}
       />,
     );
 

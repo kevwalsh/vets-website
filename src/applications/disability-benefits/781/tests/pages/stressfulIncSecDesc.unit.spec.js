@@ -9,7 +9,7 @@ describe('Add Secondary Stressful Incident Description', () => {
   const {
     schema,
     uiSchema,
-  } = formConfig.chapters.introductionPage.pages.stressfulIncidentSecondaryDescription;
+  } = formConfig.chapters.disabilityDetails.pages.stressfulIncidentSecondaryDescription;
 
   it('should render', () => {
     const form = mount(

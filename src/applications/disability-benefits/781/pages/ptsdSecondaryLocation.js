@@ -18,27 +18,12 @@ const { addressUI, addressSchema } = locationSchemas();
 export const uiSchema = {
   'ui:title': PtsdNameTitle,
   'ui:description': ptsdLocationDescription,
-  secondaryIncidentLocation: {
-    ...addressUI,
-    additionalDetails: {
-      'ui:title': 'Additional details', // Currently only on 781a, keeping here for now.
-      'ui:widget': 'textarea',
-    },
-    'ui:order': [...addressUI['ui:order'], 'additionalDetails'],
-  },
+  secondaryIncidentLocation: addressUI,
 };
 
 export const schema = {
   type: 'object',
   properties: {
-    secondaryIncidentLocation: {
-      ...addressSchema,
-      properties: {
-        ...addressSchema.properties,
-        additionalDetails: {
-          type: 'string',
-        },
-      },
-    },
+    secondaryIncidentLocation: addressSchema,
   },
 };
