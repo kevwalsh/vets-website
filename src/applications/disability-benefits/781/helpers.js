@@ -254,7 +254,7 @@ export function locationSchemas() {
           'Additional details (Include address, landmark, military installation, or other location.)',
         'ui:widget': 'textarea',
       },
-      'ui:order': ['country', 'city', 'state', 'additionalDetails'],
+      'ui:order': ['country', 'state', 'city', 'additionalDetails'],
     },
     addressSchema: {
       ...addressSchemaConfig,
