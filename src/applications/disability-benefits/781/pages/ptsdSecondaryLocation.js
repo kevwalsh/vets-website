@@ -5,11 +5,7 @@ import { PtsdNameTitle, locationSchemas } from '../helpers';
 const ptsdLocationDescription = () => (
   <div>
     <h5>Event location</h5>
-    <p>
-      Where did the event happen? Please be as specific as you can and include
-      the name of the city, state, country, province, landmark, or military
-      installation.
-    </p>
+    <p>Where did the event happen? Please be as specific as you can.</p>
   </div>
 );
 
