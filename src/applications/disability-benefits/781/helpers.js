@@ -267,6 +267,7 @@ export function locationSchemas() {
     },
   };
 }
+console.log(locationSchemas());
 export const stressfulIncidentDescriptionTitle = () => (
   <div>
     <h5>Event description</h5>
