@@ -58,6 +58,16 @@ import {
   schema as otherSourcesSecondarySchema,
 } from './otherSourcesSecondary';
 
+import {
+  uiSchema as privateMedicalTreatmentSecondaryUISchema,
+  schema as privateMedicalTreatmentSecondarySchema,
+} from './privateMedicalTreatmentSecondary';
+
+import {
+  uiSchema as requestingStatementsSecondaryUISchema,
+  schema as requestingStatementsSecondarySchema,
+} from './requestingStatementsSecondary';
+
 export const ptsdType = {
   uiSchema: ptsdTypeUISchema,
   schema: ptsdTypeSchema,
@@ -116,4 +126,14 @@ export const stressfulIncSecDesc = {
 export const otherSourcesSecondary = {
   uiSchema: otherSourcesSecondaryUISchema,
   schema: otherSourcesSecondarySchema,
+};
+
+export const privateMedicalTreatmentSecondary = {
+  uiSchema: privateMedicalTreatmentSecondaryUISchema,
+  schema: privateMedicalTreatmentSecondarySchema,
+};
+
+export const requestingStatementsSecondary = {
+  uiSchema: requestingStatementsSecondaryUISchema,
+  schema: requestingStatementsSecondarySchema,
 };

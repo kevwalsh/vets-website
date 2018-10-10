@@ -1,4 +1,4 @@
-// import _ from 'lodash/fp';
+// import _ from '../../../../platform/utilities/data';
 
 // Example of an imported schema:
 // import fullSchema from '../21-0781-schema.json';
@@ -28,6 +28,8 @@ import {
   informationInterviewAssault,
   stressfulIncSecDesc,
   otherSourcesSecondary,
+  privateMedicalTreatmentSecondary,
+  requestingStatementsSecondary,
 } from '../pages';
 
 const formConfig = {
@@ -103,6 +105,16 @@ const formConfig = {
           uiSchema: ptsdSecondaryChoice.uiSchema,
           schema: ptsdSecondaryChoice.schema,
         },
+        uploadPtsdSecondary: {
+          path: 'upload-781a',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'upload' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: uploadPtsdSecondary.uiSchema,
+          schema: uploadPtsdSecondary.schema,
+        },
         informationInterviewAssault: {
           path: 'information-781a',
           title: 'Disability Details',
@@ -126,7 +138,6 @@ const formConfig = {
             green: true,
           },
         },
-
         ptsdSecondaryAssignmentDetails: {
           path: 'ptsdSecondaryAssignmentDetails',
           title: 'Disability Details',
@@ -147,18 +158,13 @@ const formConfig = {
           uiSchema: ptsdSecondaryLocation.uiSchema,
           schema: ptsdSecondaryLocation.schema,
         },
-        uploadPtsdSecondary: {
-          path: 'upload-781a',
-          title: 'Disability Details',
-          depends: form =>
-            form['view:uploadPtsdSecondaryChoice'] === 'upload' &&
-            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
-              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
-          uiSchema: uploadPtsdSecondary.uiSchema,
-          schema: uploadPtsdSecondary.schema,
-        },
         stressfulIncidentSecondaryDescription: {
           path: 'stressful-incident-secondary-description',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: stressfulIncSecDesc.uiSchema,
           schema: stressfulIncSecDesc.schema,
         },
@@ -171,6 +177,34 @@ const formConfig = {
               form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: otherSourcesSecondary.uiSchema,
           schema: otherSourcesSecondary.schema,
+        },
+        privateMedicalTreatmentSecondary: {
+          path: 'private-medical-treatment-secondary',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']) &&
+            (form.gatherInformation === 'yes' &&
+              form['view:isSecondaryHelp'].howToHelpSecondary[
+                'view:helpPrivateMedicalTreatment'
+              ]),
+          uiSchema: privateMedicalTreatmentSecondary.uiSchema,
+          schema: privateMedicalTreatmentSecondary.schema,
+        },
+        requestingStatementsSecondary: {
+          path: 'requesting-statements-secondary',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']) &&
+            (form.gatherInformation === 'yes' &&
+              form['view:isSecondaryHelp'].howToHelpSecondary[
+                'view:helpRequestingStatements'
+              ]),
+          uiSchema: requestingStatementsSecondary.uiSchema,
+          schema: requestingStatementsSecondary.schema,
         },
         // medals: { //TODO: KEEP FOR NEXT STORY
         //   path: 'information-781',

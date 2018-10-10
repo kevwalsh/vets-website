@@ -3,7 +3,9 @@ import { PtsdNameTitle, stressfulIncidentDescriptionTitle } from '../helpers';
 
 export const uiSchema = {
   'ui:title': ({ formData }) => (
-    <PtsdNameTitle formData={formData} formType="781a" />
+    <PtsdNameTitle formData={formData} formType="781a">
+      Event description
+    </PtsdNameTitle>
   ),
   'ui:description': stressfulIncidentDescriptionTitle,
   secondaryIncidentDescription: {
