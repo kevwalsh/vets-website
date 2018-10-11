@@ -42,7 +42,7 @@ export const uiSchema = {
     <PtsdNameTitle formData={formData} formType="781" />
   ),
   'ui:description': ptsdDateDescription,
-  secondaryIncidentDate: {
+  ptsdPrimaryIncidentDate: {
     'ui:title': ' ',
     'ui:widget': 'date',
   },
@@ -51,10 +51,10 @@ export const uiSchema = {
 export const schema = {
   type: 'object',
   properties: {
-    secondaryIncidentDate: {
+    ptsdPrimaryIncidentDate: {
       type: 'string',
     },
-    'view:ptsdDateSecondaryDescription': {
+    'view:ptsdDatePrimaryDescription': {
       type: 'object',
       properties: {},
     },
