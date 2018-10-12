@@ -13,7 +13,12 @@ import ConfirmationPage from '../containers/ConfirmationPage';
 // Define all the fields in the form to aid reuse
 // const formFields = {};
 
-import { informationPage, ptsdType } from '../pages';
+import {
+  informationPage,
+  ptsdType,
+  ptsdChoice,
+  ptsdSecondaryChoice,
+} from '../pages';
 
 const formConfig = {
   urlPrefix: '/',
@@ -49,6 +54,24 @@ const formConfig = {
           path: 'ptsdType',
           uiSchema: ptsdType.uiSchema,
           schema: ptsdType.schema,
+        },
+        ptsdChoice: {
+          path: 'ptsdChoice',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+            form['view:selectablePtsdTypes']['view:noncombatPtsdType'],
+          uiSchema: ptsdChoice.uiSchema,
+          schema: ptsdChoice.schema,
+        },
+        ptsdSecondaryChoice: {
+          path: 'ptsdSecondaryChoice',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+            form['view:selectablePtsdTypes']['view:assaultPtsdType'],
+          uiSchema: ptsdSecondaryChoice.uiSchema,
+          schema: ptsdSecondaryChoice.schema,
         },
       },
     },
