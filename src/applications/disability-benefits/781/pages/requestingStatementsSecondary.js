@@ -1,15 +1,14 @@
 import React from 'react';
 import { PtsdNameTitle } from '../helpers';
 import fullSchema781 from '../21-0781-schema.json';
-// import { countries, states, stateNames } from '../../526EZ/helpers';
-import {
-  //  schema as addressSchema,
-  uiSchema as addressUI,
-} from '../../../../platform/forms/definitions/address';
+
+import { uiSchema as addressUI } from '../../../../platform/forms/definitions/address';
 
 import { schema as addressSchema } from '../definitions/address';
 import requestingStatementsSecondaryView from '../components/requestingStatementsSecondaryView';
-// import _ from 'lodash';
+
+import PhoneNumberWidget from 'us-forms-system/lib/js/widgets/PhoneNumberWidget';
+import PhoneNumberReviewWidget from 'us-forms-system/lib/js/review/PhoneNumberWidget';
 
 const requestingStatementsSecondaryDescription = (
   <div>
@@ -39,22 +38,12 @@ export const uiSchema = {
       authorityAddress: Object.assign(addressUI('', false), {
         street: {
           'ui:title': 'Street Address',
-          // 'ui:errorMessages': {
-          //   pattern: 'Street address must be less than 20 characters.',
-          // },
         },
         street2: {
           'ui:title': 'Street Address',
-          // 'ui:errorMessages': {
-          //   pattern: 'Street address 2 must be less than 6 characters.',
-          // },
         },
         city: {
           'ui:title': 'City',
-          // 'ui:errorMessages': {
-          //   pattern:
-          //     'Please provide a valid city. Must be at least 1 character.',
-          // },
         },
         state: {
           'ui:title': 'State',
@@ -64,13 +53,16 @@ export const uiSchema = {
           'ui:options': {
             widgetClassNames: 'usa-input-medium',
           },
-          // 'ui:validations': [
-          //   {
-          //     validator: validateZIP,
-          //   },
-          // ],
         },
       }),
+      primaryPhone: {
+        'ui:title': 'Phone number',
+        'ui:widget': PhoneNumberWidget,
+        'ui:reviewWidget': PhoneNumberReviewWidget,
+        'ui:options': {
+          widgetClassNames: 'va-input-medium-large',
+        },
+      },
     },
   },
 };
@@ -108,16 +100,16 @@ export const schema = {
               },
               country: {
                 type: 'string',
-                //  enum: countries,
-                //  default: 'USA',
               },
               state: {
                 type: 'string',
-                //  enum: states,
-                //  enumNames: stateNames,
               },
             },
           }),
+          primaryPhone: {
+            type: 'string',
+            properties: {},
+          },
         },
       },
     },
