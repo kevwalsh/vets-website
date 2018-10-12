@@ -13,6 +13,8 @@ import ConfirmationPage from '../containers/ConfirmationPage';
 // Define all the fields in the form to aid reuse
 // const formFields = {};
 
+import { informationPage, ptsdType } from '../pages';
+
 const formConfig = {
   urlPrefix: '/',
   submit: () =>
@@ -28,7 +30,29 @@ const formConfig = {
     noAuth: 'Please sign in again to continue your application for benefits.',
   },
   title: 'Apply for increased disability compensation',
-  chapters: {},
+  chapters: {
+    introductionPage: {
+      pages: {
+        ptsdIntroduction: {
+          title: 'Disability Details',
+          path: 'info',
+          uiSchema: informationPage.uiSchema,
+          schema: informationPage.schema,
+        },
+      },
+    },
+    disabilityDetails: {
+      title: 'Disability Details',
+      pages: {
+        ptsdType: {
+          title: 'PTSD Type',
+          path: 'ptsdType',
+          uiSchema: ptsdType.uiSchema,
+          schema: ptsdType.schema,
+        },
+      },
+    },
+  },
 };
 
 export default formConfig;
