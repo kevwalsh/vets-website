@@ -1,8 +1,6 @@
 import React from 'react';
 import { PtsdNameTitle, getPtsdClassification } from '../helpers';
 
-import MedalsModal from '../components/MedalsModal';
-
 const MedalsDescription = ({ formData, formType }) => {
   const { incidentText } = getPtsdClassification(formData, formType);
 
@@ -34,41 +32,12 @@ export const uiSchema = {
       },
     },
   },
-  selectMedals: {
-    'ui:title': ' ',
-    'ui:description': 'Please choose the medals or citations you received',
-    'ui:field': 'StringField',
-    'ui:widget': MedalsModal,
+  medals: {
+    'ui:title':
+      'Which medals or citations did you receive for this event or situation?',
     'ui:options': {
-      showFieldLabel: 'label',
-      label: 'label',
-      widgetClassNames: 'widget-outline',
-      keepInPageOnReview: true,
-      // expandUnder: 'view:medalsChoice',
-      // expandUnderCondition: 'yes', // TODO: unable to enable expandUnderConditons twice in a ui:schema
-    },
-  },
-  'view:otherMedal': {
-    'ui:title': ' ',
-    'ui:description': 'Enter other medals or citations here',
-    'ui:options': {
-      expandUnder: 'selectMedals',
-      // TODO: unable to enable expandUnderConditons twice in a ui:schema
-      expandUnderCondition: formData => {
-        if (formData) {
-          const medals = Object.keys(formData).filter(
-            key => formData[key] === true,
-          );
-          const other = medals.filter(
-            medal => medal === 'Other medal(s) or citations',
-          );
-
-          if (other.length > 0) {
-            return true;
-          }
-        }
-        return false;
-      },
+      expandUnder: 'view:medalsChoice',
+      expandUnderCondition: 'yes',
     },
   },
 };
@@ -80,15 +49,7 @@ export const schema = {
       type: 'string',
       enum: ['yes', 'no'],
     },
-    selectMedals: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {},
-      },
-    },
-
-    'view:otherMedal': {
+    medals: {
       type: 'string',
       properties: {},
     },
