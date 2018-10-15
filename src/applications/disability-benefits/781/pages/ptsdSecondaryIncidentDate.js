@@ -2,6 +2,7 @@ import React from 'react';
 import { PtsdNameTitle, getPtsdClassification } from '../helpers';
 
 import AdditionalInfo from '@department-of-veterans-affairs/formation/AdditionalInfo';
+import currentOrPastDateUI from 'us-forms-system/lib/js/definitions/currentOrPastDate';
 
 const ptsdDateDescription = ({ formData }) => {
   const { incidentText } = getPtsdClassification(formData, '781a');
@@ -42,10 +43,7 @@ export const uiSchema = {
     <PtsdNameTitle formData={formData} formType="781a" />
   ),
   'ui:description': ptsdDateDescription,
-  secondaryIncidentDate: {
-    'ui:title': ' ',
-    'ui:widget': 'date',
-  },
+  secondaryIncidentDate: currentOrPastDateUI(' '),
 };
 
 export const schema = {

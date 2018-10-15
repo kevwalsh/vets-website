@@ -38,6 +38,11 @@ import {
   schema as informationInterviewAssaultSchema,
 } from './informationInterviewAssault';
 
+import {
+  uiSchema as ptsdSecondaryIncidentDateUISchema,
+  schema as ptsdSecondaryIncidentDateSchema,
+} from './ptsdSecondaryIncidentDate';
+
 export const informationPage = {
   uiSchema: informationUISchema,
   schema: informationSchema,
@@ -76,4 +81,9 @@ export const informationInterviewCombat = {
 export const informationInterviewAssault = {
   uiSchema: informationInterviewAssaultUISchema,
   schema: informationInterviewAssaultSchema,
+};
+
+export const ptsdSecondaryIncidentDate = {
+  uiSchema: ptsdSecondaryIncidentDateUISchema,
+  schema: ptsdSecondaryIncidentDateSchema,
 };
