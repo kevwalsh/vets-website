@@ -6,7 +6,7 @@ import { mount } from 'enzyme';
 import { DefinitionTester } from '../../../../../platform/testing/unit/schemaform-utils.jsx';
 import formConfig from '../../config/form.js';
 
-describe('718a record upload', () => {
+describe('781a record upload', () => {
   const page = formConfig.chapters.disabilityDetails.pages.uploadPtsdSecondary;
   const { schema, uiSchema, arrayPath } = page;
 
