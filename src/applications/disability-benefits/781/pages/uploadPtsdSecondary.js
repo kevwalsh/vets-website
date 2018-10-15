@@ -1,14 +1,17 @@
+import React from 'react';
 import fileUploadUI from 'us-forms-system/lib/js/definitions/file';
 import environment from '../../../../platform/utilities/environment';
 
-import { ptsdNameTitle, documentDescription } from '../helpers';
+import { PtsdNameTitle, documentDescription } from '../helpers';
 
 const FIFTY_MB = 52428800;
 
 export const uiSchema = {
-  'ui:title': ptsdNameTitle,
+  'ui:title': ({ formData }) => (
+    <PtsdNameTitle formData={formData} formType="781a" />
+  ),
   'ui:description': documentDescription,
-  ptsd781a: fileUploadUI('', {
+  ptsd781: fileUploadUI('', {
     itemDescription: 'PTSD 781a form',
     hideLabelText: true,
     fileUploadUrl: `${environment.API_URL}/v0`,
@@ -26,7 +29,6 @@ export const uiSchema = {
     maxSize: FIFTY_MB,
     createPayload: file => {
       const payload = new FormData();
-
       payload.append('disability_details_attachment[file_data]', file);
 
       return payload;
@@ -51,7 +53,7 @@ export const uiSchema = {
 export const schema = {
   type: 'object',
   properties: {
-    ptsd781a: {
+    ptsd781: {
       type: 'array',
       items: {
         type: 'object',

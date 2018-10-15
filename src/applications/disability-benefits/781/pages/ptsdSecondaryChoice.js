@@ -1,14 +1,19 @@
 import React from 'react';
 import {
-  ptsdNameTitle,
+  PtsdNameTitle,
   UploadPtsdDescription,
-  PtsdChoiceDescription,
+  ptsdChoiceDescription,
 } from '../helpers';
 
 export const uiSchema = {
-  'ui:title': ptsdNameTitle,
+  'ui:title': ({ formData }) => (
+    <PtsdNameTitle formData={formData} formType="781a" />
+  ),
+  'ui:description': ({ formData }) => (
+    <UploadPtsdDescription formData={formData} formType="781a" />
+  ),
   'view:uploadPtsdSecondaryChoice': {
-    'ui:title': <UploadPtsdDescription formType="781a" />,
+    'ui:title': ' ',
     'ui:widget': 'radio',
     'ui:options': {
       labels: {
@@ -18,7 +23,7 @@ export const uiSchema = {
     },
   },
   'view:uploadPtsdSecondaryChoiceHelp': {
-    'ui:description': <PtsdChoiceDescription formType="781a" />,
+    'ui:description': ptsdChoiceDescription,
   },
 };
 
