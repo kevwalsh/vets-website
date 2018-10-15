@@ -23,6 +23,7 @@ import {
   informationInterviewCombat,
   informationInterviewAssault,
   ptsdSecondaryIncidentDate,
+  ptsdSecondaryAssignmentDetails,
 } from '../pages';
 
 const formConfig = {
@@ -131,6 +132,16 @@ const formConfig = {
           properties: {
             green: true,
           },
+        },
+        ptsdSecondaryAssignmentDetails: {
+          path: 'ptsdSecondaryAssignmentDetails',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: ptsdSecondaryAssignmentDetails.uiSchema,
+          schema: ptsdSecondaryAssignmentDetails.schema,
         },
       },
     },
