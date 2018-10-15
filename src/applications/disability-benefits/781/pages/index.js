@@ -28,6 +28,16 @@ import {
   schema as ptsd781aSchema,
 } from './uploadPtsdSecondary';
 
+import {
+  uiSchema as informationInterviewCombatUISchema,
+  schema as informationInterviewCombatSchema,
+} from './informationInterviewCombat';
+
+import {
+  uiSchema as informationInterviewAssaultUISchema,
+  schema as informationInterviewAssaultSchema,
+} from './informationInterviewAssault';
+
 export const informationPage = {
   uiSchema: informationUISchema,
   schema: informationSchema,
@@ -56,4 +66,14 @@ export const uploadPtsd = {
 export const uploadPtsdSecondary = {
   uiSchema: ptsd781aUISchema,
   schema: ptsd781aSchema,
+};
+
+export const informationInterviewCombat = {
+  uiSchema: informationInterviewCombatUISchema,
+  schema: informationInterviewCombatSchema,
+};
+
+export const informationInterviewAssault = {
+  uiSchema: informationInterviewAssaultUISchema,
+  schema: informationInterviewAssaultSchema,
 };

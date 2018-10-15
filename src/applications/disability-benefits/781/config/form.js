@@ -20,6 +20,8 @@ import {
   ptsdSecondaryChoice,
   uploadPtsd,
   uploadPtsdSecondary,
+  informationInterviewCombat,
+  informationInterviewAssault,
 } from '../pages';
 
 const formConfig = {
@@ -76,6 +78,17 @@ const formConfig = {
           uiSchema: uploadPtsd.uiSchema,
           schema: uploadPtsd.schema,
         },
+        informationInterviewCombat: {
+          path: 'information-781',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
+          uiSchema: informationInterviewCombat.uiSchema,
+          schema: informationInterviewCombat.schema,
+        },
+
         ptsdSecondaryChoice: {
           path: 'ptsdSecondaryChoice',
           title: 'Disability Details',
@@ -94,6 +107,16 @@ const formConfig = {
               form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: uploadPtsdSecondary.uiSchema,
           schema: uploadPtsdSecondary.schema,
+        },
+        informationInterviewAssault: {
+          path: 'information-781a',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: informationInterviewAssault.uiSchema,
+          schema: informationInterviewAssault.schema,
         },
       },
     },
