@@ -45,6 +45,9 @@ export const uiSchema = {
   ptsdPrimaryIncidentDate: {
     'ui:title': ' ',
     'ui:widget': 'date',
+    'ui:errorMessages': {
+      pattern: 'Please enter 4 digit year.',
+    },
   },
 };
 
@@ -53,6 +56,7 @@ export const schema = {
   properties: {
     ptsdPrimaryIncidentDate: {
       type: 'string',
+      pattern: '^(.{1,10})$',
     },
     'view:ptsdDatePrimaryDescription': {
       type: 'object',
