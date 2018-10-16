@@ -23,6 +23,7 @@ import {
   informationInterviewCombat,
   informationInterviewAssault,
   ptsdSecondaryIncidentDate,
+  ptsdIncidentDate,
 } from '../pages';
 
 const formConfig = {
@@ -89,7 +90,16 @@ const formConfig = {
           uiSchema: informationInterviewCombat.uiSchema,
           schema: informationInterviewCombat.schema,
         },
-
+        ptsdIncidentDate: {
+          path: 'ptsdIncidentDate',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
+          uiSchema: ptsdIncidentDate.uiSchema,
+          schema: ptsdIncidentDate.schema,
+        },
         ptsdSecondaryChoice: {
           path: 'ptsdSecondaryChoice',
           title: 'Disability Details',

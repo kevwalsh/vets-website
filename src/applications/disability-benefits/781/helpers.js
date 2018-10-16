@@ -224,3 +224,16 @@ export const ptsdChoiceDescription = (
     </p>
   </AdditionalInfo>
 );
+
+export const incidentDateMoreInfo = (
+  <AdditionalInfo triggerText="More suggestions">
+    <p>
+      Identifying the date of the incident within a 60-day window helps us
+      better research your claim. Some other ways to place the date range are to
+      recall what the weather was like when the event happened – warm or cold –
+      to identify the season, or to identify whether it was early or later in
+      your deployment or perhaps think of a landmark or place you were during a
+      particular time.
+    </p>
+  </AdditionalInfo>
+);
