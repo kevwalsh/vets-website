@@ -30,6 +30,7 @@ import {
   otherSourcesSecondary,
   privateMedicalTreatmentSecondary,
   requestingStatementsSecondary,
+  chooseUploadSupportingDocumentsSecondary,
   uploadSupportingDocumentsSecondary,
 } from '../pages';
 
@@ -207,8 +208,8 @@ const formConfig = {
           uiSchema: requestingStatementsSecondary.uiSchema,
           schema: requestingStatementsSecondary.schema,
         },
-        uploadSupportingDocumentsSecondary: {
-          path: 'upload-781a-supporting-documents',
+        chooseUploadSupportingDocumentsSecondary: {
+          path: 'choose-upload-781a-supporting-documents',
           title: 'Disability Details',
           depends: form =>
             form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
@@ -218,6 +219,21 @@ const formConfig = {
               form['view:isSecondaryHelp'].howToHelpSecondary[
                 'view:helpRequestingStatements'
               ]),
+          uiSchema: chooseUploadSupportingDocumentsSecondary.uiSchema,
+          schema: chooseUploadSupportingDocumentsSecondary.schema,
+        },
+        uploadSupportingDocumentsSecondaryFile: {
+          path: 'upload-781a-supporting-documents-file',
+          title: 'Disability Details',
+          depends: form =>
+            form['view:uploadPtsdSecondaryChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']) &&
+            (form.gatherInformation === 'yes' &&
+              form['view:isSecondaryHelp'].howToHelpSecondary[
+                'view:helpRequestingStatements'
+              ]) &&
+            form.supportingDocuments === 'yes',
           uiSchema: uploadSupportingDocumentsSecondary.uiSchema,
           schema: uploadSupportingDocumentsSecondary.schema,
         },
