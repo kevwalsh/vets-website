@@ -68,6 +68,11 @@ import {
   schema as requestingStatementsSecondarySchema,
 } from './requestingStatementsSecondary';
 
+import {
+  uiSchema as uploadSupportingDocumentsSecondaryUISchema,
+  schema as uploadSupportingDocumentsSecondarySchema,
+} from './uploadSupportingDocumentsSecondary';
+
 export const ptsdType = {
   uiSchema: ptsdTypeUISchema,
   schema: ptsdTypeSchema,
@@ -136,4 +141,9 @@ export const privateMedicalTreatmentSecondary = {
 export const requestingStatementsSecondary = {
   uiSchema: requestingStatementsSecondaryUISchema,
   schema: requestingStatementsSecondarySchema,
+};
+
+export const uploadSupportingDocumentsSecondary = {
+  uiSchema: uploadSupportingDocumentsSecondaryUISchema,
+  schema: uploadSupportingDocumentsSecondarySchema,
 };
