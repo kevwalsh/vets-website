@@ -87,7 +87,7 @@ export const schema = {
               },
               street2: {
                 minLength: 1,
-                maxLength: 5,
+                maxLength: 50,
                 type: 'string',
               },
               city: {
