@@ -7,9 +7,9 @@ const ptsdDateDescription = () => (
   <div>
     <h5>Event date</h5>
     <p>
-      When did the first event happen? Please note, this date doesn’t have to be
+      When did the event happen? Please note, this date doesn’t have to be
       exact, but it’ll help with our research if you provide a date within a
-      2-month range.{' '}
+      2-month range of the event.{' '}
     </p>
     <p>
       If you can’t remember the exact date, we suggest you try to recall the
