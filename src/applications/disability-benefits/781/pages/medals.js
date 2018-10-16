@@ -6,6 +6,7 @@ const MedalsDescription = ({ formData, formType }) => {
 
   return (
     <div>
+      <h3>Medals or Citations</h3>
       <p>
         Now we’ll ask about the event or events that caused your
         {` ${incidentText}`}
@@ -18,7 +19,9 @@ const MedalsDescription = ({ formData, formType }) => {
 };
 
 export const uiSchema = {
-  'ui:title': PtsdNameTitle,
+  'ui:title': ({ formData }) => (
+    <PtsdNameTitle formData={formData} formType="781" />
+  ),
   'ui:description': ({ formData }) => (
     <MedalsDescription formData={formData} formType="781" />
   ),
