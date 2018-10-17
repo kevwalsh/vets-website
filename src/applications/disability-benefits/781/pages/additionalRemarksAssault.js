@@ -18,10 +18,10 @@ const additionalRemarksQuestion = (
 
 export const uiSchema = {
   'ui:title': ({ formData }) => (
-    <PtsdNameTitle formData={formData} formType="781" />
+    <PtsdNameTitle formData={formData} formType="781a" />
   ),
   'ui:description': additionalRemarksQuestion,
-  additionalRemarksCombat: {
+  additionalRemarksAssault: {
     'ui:title': ' ',
     'ui:widget': 'textarea',
   },
@@ -30,7 +30,7 @@ export const uiSchema = {
 export const schema = {
   type: 'object',
   properties: {
-    additionalRemarksCombat: {
+    additionalRemarksAssault: {
       type: 'string',
     },
   },

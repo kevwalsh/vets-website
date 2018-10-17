@@ -25,6 +25,9 @@ import {
   additionalEventsCombat,
   additionalEventsAssault,
   additionalRemarksCombat,
+  additionalRemarksAssault,
+  conclusionCombat,
+  conclusionAssault,
 } from '../pages';
 
 const formConfig = {
@@ -111,6 +114,16 @@ const formConfig = {
           uiSchema: additionalRemarksCombat.uiSchema,
           schema: additionalRemarksCombat.schema,
         },
+        conclusionCombat: {
+          path: 'conclusion-781',
+          title: 'Disabiity Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:combatPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:noncombatPtsdType']),
+          uiSchema: conclusionCombat.uiSchema,
+          schema: conclusionCombat.schema,
+        },
         ptsdSecondaryChoice: {
           path: 'ptsdSecondaryChoice',
           title: 'Disability Details',
@@ -149,6 +162,26 @@ const formConfig = {
               form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: additionalEventsAssault.uiSchema,
           schema: additionalEventsAssault.schema,
+        },
+        additionaRemarksAssault: {
+          path: 'additional-remarks-781a',
+          title: 'Disabiity Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: additionalRemarksAssault.uiSchema,
+          schema: additionalRemarksAssault.schema,
+        },
+        conclusionAssault: {
+          path: 'conclusion-781a',
+          title: 'Disabiity Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: conclusionAssault.uiSchema,
+          schema: conclusionAssault.schema,
         },
       },
     },

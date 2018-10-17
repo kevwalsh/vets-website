@@ -53,6 +53,21 @@ import {
   schema as additionalRemarksCombatSchema,
 } from './additionalRemarksCombat';
 
+import {
+  uiSchema as additionalRemarksAssaultUISchema,
+  schema as additionalRemarksAssaultSchema,
+} from './additionalRemarksAssault';
+
+import {
+  uiSchema as conclusionCombatUISchema,
+  schema as conclusionCombatSchema,
+} from './conclusionCombat';
+
+import {
+  uiSchema as conclusionAssaultUISchema,
+  schema as conclusionAssaultSchema,
+} from './conclusionAssault';
+
 export const informationPage = {
   uiSchema: informationUISchema,
   schema: informationSchema,
@@ -106,4 +121,19 @@ export const additionalEventsAssault = {
 export const additionalRemarksCombat = {
   uiSchema: additionalRemarksCombatUISchema,
   schema: additionalRemarksCombatSchema,
+};
+
+export const additionalRemarksAssault = {
+  uiSchema: additionalRemarksAssaultUISchema,
+  schema: additionalRemarksAssaultSchema,
+};
+
+export const conclusionCombat = {
+  uiSchema: conclusionCombatUISchema,
+  schema: conclusionCombatSchema,
+};
+
+export const conclusionAssault = {
+  uiSchema: conclusionAssaultUISchema,
+  schema: conclusionAssaultSchema,
 };
