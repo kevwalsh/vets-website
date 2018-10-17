@@ -1,5 +1,11 @@
 import React from 'react';
+import { omit } from 'lodash';
 import AdditionalInfo from '@department-of-veterans-affairs/formation/AdditionalInfo';
+import fullSchema781 from './21-0781-schema.json';
+import {
+  schema as addressSchema,
+  uiSchema as addressUI,
+} from '../../../platform/forms/definitions/address';
 
 const getPtsdClassification = (formData, formType) => {
   const classifications = formData['view:selectablePtsdTypes'];
@@ -224,3 +230,40 @@ export const ptsdChoiceDescription = (
     </p>
   </AdditionalInfo>
 );
+
+export const ptsdLocationDescription = () => (
+  <div>
+    <h5>Event location</h5>
+    <p>Where did the event happen? Please be as specific as you can.</p>
+  </div>
+);
+
+export function locationSchemas() {
+  const addressOmitions = ['street', 'street2', 'street3', 'postalCode'];
+  const addressSchemaConfig = addressSchema(fullSchema781);
+  const addressUIConfig = omit(addressUI(' '), addressOmitions);
+  return {
+    addressUI: {
+      ...addressUIConfig,
+      state: {
+        ...addressUIConfig.state,
+        'ui:title': 'State/Province',
+      },
+      additionalDetails: {
+        'ui:title':
+          'Additional details (Include address, landmark, military installation, or other location.)',
+        'ui:widget': 'textarea',
+      },
+      'ui:order': ['country', 'state', 'city', 'additionalDetails'],
+    },
+    addressSchema: {
+      ...addressSchemaConfig,
+      properties: {
+        ...omit(addressSchemaConfig.properties, addressOmitions),
+        additionalDetails: {
+          type: 'string',
+        },
+      },
+    },
+  };
+}

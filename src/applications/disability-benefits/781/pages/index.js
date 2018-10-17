@@ -38,6 +38,16 @@ import {
   schema as informationInterviewAssaultSchema,
 } from './informationInterviewAssault';
 
+import {
+  uiSchema as ptsdLocationUISchema,
+  schema as ptsdLocationSchema,
+} from './ptsdLocation';
+
+import {
+  uiSchema as ptsdSecondaryLocationUISchema,
+  schema as ptsdSecondaryLocationSchema,
+} from './ptsdSecondaryLocation';
+
 export const informationPage = {
   uiSchema: informationUISchema,
   schema: informationSchema,
@@ -76,4 +86,13 @@ export const informationInterviewCombat = {
 export const informationInterviewAssault = {
   uiSchema: informationInterviewAssaultUISchema,
   schema: informationInterviewAssaultSchema,
+};
+
+export const ptsdSecondaryLocation = {
+  uiSchema: ptsdSecondaryLocationUISchema,
+  schema: ptsdSecondaryLocationSchema,
+};
+export const ptsdLocation = {
+  uiSchema: ptsdLocationUISchema,
+  schema: ptsdLocationSchema,
 };
