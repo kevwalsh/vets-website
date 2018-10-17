@@ -43,6 +43,11 @@ import {
   schema as additionalEventsCombatSchema,
 } from './additionalEventsCombat';
 
+import {
+  uiSchema as additionalEventsAssaultUISchema,
+  schema as additionalEventsAssaultSchema,
+} from './additionalEventsAssault';
+
 export const informationPage = {
   uiSchema: informationUISchema,
   schema: informationSchema,
@@ -86,4 +91,9 @@ export const informationInterviewAssault = {
 export const additionalEventsCombat = {
   uiSchema: additionalEventsCombatUISchema,
   schema: additionalEventsCombatSchema,
+};
+
+export const additionalEventsAssault = {
+  uiSchema: additionalEventsAssaultUISchema,
+  schema: additionalEventsAssaultSchema,
 };

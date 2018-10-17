@@ -23,6 +23,7 @@ import {
   informationInterviewCombat,
   informationInterviewAssault,
   additionalEventsCombat,
+  additionalEventsAssault,
 } from '../pages';
 
 const formConfig = {
@@ -127,6 +128,16 @@ const formConfig = {
               form['view:selectablePtsdTypes']['view:assaultPtsdType']),
           uiSchema: informationInterviewAssault.uiSchema,
           schema: informationInterviewAssault.schema,
+        },
+        additionalEventsAssault: {
+          path: 'additional-events-781a',
+          title: 'Disabiity Details',
+          depends: form =>
+            form['view:uploadPtsdChoice'] === 'answerQuestions' &&
+            (form['view:selectablePtsdTypes']['view:mstPtsdType'] ||
+              form['view:selectablePtsdTypes']['view:assaultPtsdType']),
+          uiSchema: additionalEventsAssault.uiSchema,
+          schema: additionalEventsAssault.schema,
         },
       },
     },

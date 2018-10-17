@@ -9,9 +9,9 @@ const additionalEventsQuestion = (
 );
 export const uiSchema = {
   'ui:title': ({ formData }) => (
-    <PtsdNameTitle formData={formData} formType="781" />
+    <PtsdNameTitle formData={formData} formType="781a" />
   ),
-  'view:additionalEventsCombat': {
+  'view:additionalEventsAssault': {
     'ui:title': ' ',
     'ui:description': additionalEventsQuestion,
     'ui:widget': 'radio',
@@ -27,7 +27,7 @@ export const uiSchema = {
 export const schema = {
   type: 'object',
   properties: {
-    'view:additionalEventsCombat': {
+    'view:additionalEventsAssault': {
       type: 'string',
       enum: ['yes', 'no'],
     },
