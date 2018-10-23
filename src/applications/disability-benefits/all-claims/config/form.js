@@ -42,6 +42,7 @@ import {
   choosePtsdType,
   ptsdWalkthroughChoice781,
   uploadPtsdDocuments,
+  ptsdSecondaryDate,
   summaryOfDisabilities,
   vaMedicalRecords,
   additionalDocuments,
@@ -255,6 +256,14 @@ const formConfig = {
             isUploadingPtsdForm(formData),
           uiSchema: uploadPtsdDocuments.uiSchema,
           schema: uploadPtsdDocuments.schema,
+        },
+        ptsdSecondaryDate: {
+          title: 'Event Date - 781a',
+          path: 'new-disabilities/ptsd-781a-event-date',
+          depends: formData =>
+            hasNewPtsdDisability(formData) && needsToEnter781(formData),
+          uiSchema: ptsdSecondaryDate.uiSchema,
+          schema: ptsdSecondaryDate.schema,
         },
         summaryOfDisabilities: {
           title: 'Summary of disabilities',

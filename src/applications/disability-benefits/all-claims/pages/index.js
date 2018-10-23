@@ -79,6 +79,11 @@ import {
 } from './uploadPtsdDocuments';
 
 import {
+  uiSchema as ptsdSecondaryDateUISchema,
+  schema as ptsdSecondaryDateSchema,
+} from './ptsdSecondaryDate';
+
+import {
   uiSchema as summaryOfDisabilitiesUISchema,
   schema as summaryOfDisabilitiesSchema,
 } from './summaryOfDisabilities';
@@ -211,6 +216,11 @@ export const ptsdWalkthroughChoice781 = {
 export const uploadPtsdDocuments = {
   uiSchema: uploadPtsdDocumentsUISchema,
   schema: uploadPtsdDocumentsSchema,
+};
+
+export const ptsdSecondaryDate = {
+  uiSchema: ptsdSecondaryDateUISchema,
+  schema: ptsdSecondaryDateSchema,
 };
 
 export const summaryOfDisabilities = {
