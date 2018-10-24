@@ -279,8 +279,8 @@ const formConfig = {
             hasNewPtsdDisability(formData) &&
             needsToEnter781(formData) &&
             isAnsweringPtsdForm(formData),
-          uiSchema: ptsdSecondaryDate.uiSchema,
-          schema: ptsdSecondaryDate.schema,
+          uiSchema: ptsdIncidentDate.uiSchema,
+          schema: ptsdIncidentDate.schema,
         },
         ptsdSecondaryFormIntro: {
           title: 'Incident Date - 781a',
@@ -299,8 +299,8 @@ const formConfig = {
             hasNewPtsdDisability(formData) &&
             needsToEnter781(formData) &&
             isAnsweringPtsdForm(formData),
-          uiSchema: ptsdIncidentDate.uiSchema,
-          schema: ptsdIncidentDate.schema,
+          uiSchema: ptsdSecondaryDate.uiSchema,
+          schema: ptsdSecondaryDate.schema,
         },
         summaryOfDisabilities: {
           title: 'Summary of disabilities',
