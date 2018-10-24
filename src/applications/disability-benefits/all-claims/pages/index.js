@@ -79,6 +79,21 @@ import {
 } from './uploadPtsdDocuments';
 
 import {
+  uiSchema as ptsdFormIntroUISchema,
+  schema as ptsdFormIntroSchema,
+} from './ptsdFormIntro';
+
+import {
+  uiSchema as ptsdSecondaryFormIntroUISchema,
+  schema as ptsdSecondaryFormIntroSchema,
+} from './ptsdSecondaryFormIntro';
+
+import {
+  uiSchema as ptsdIncidentDateUISchema,
+  schema as ptsdIncidentDateSchema,
+} from './ptsdIncidentDate';
+
+import {
   uiSchema as ptsdSecondaryDateUISchema,
   schema as ptsdSecondaryDateSchema,
 } from './ptsdSecondaryDate';
@@ -218,9 +233,24 @@ export const uploadPtsdDocuments = {
   schema: uploadPtsdDocumentsSchema,
 };
 
+export const ptsdFormIntro = {
+  uiSchema: ptsdFormIntroUISchema,
+  schema: ptsdFormIntroSchema,
+};
+
+export const ptsdSecondaryFormIntro = {
+  uiSchema: ptsdSecondaryFormIntroUISchema,
+  schema: ptsdSecondaryFormIntroSchema,
+};
+
 export const ptsdSecondaryDate = {
   uiSchema: ptsdSecondaryDateUISchema,
   schema: ptsdSecondaryDateSchema,
+};
+
+export const ptsdIncidentDate = {
+  uiSchema: ptsdIncidentDateUISchema,
+  schema: ptsdIncidentDateSchema,
 };
 
 export const summaryOfDisabilities = {

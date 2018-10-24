@@ -17,7 +17,9 @@ import {
   hasPrivateEvidence,
   hasOtherEvidence,
   needsToEnter781,
+  needsToEnter781a,
   isUploadingPtsdForm,
+  isAnsweringPtsdForm,
   servedAfter911,
 } from '../utils';
 
@@ -42,6 +44,9 @@ import {
   choosePtsdType,
   ptsdWalkthroughChoice781,
   uploadPtsdDocuments,
+  ptsdFormIntro,
+  ptsdSecondaryFormIntro,
+  ptsdIncidentDate,
   ptsdSecondaryDate,
   summaryOfDisabilities,
   vaMedicalRecords,
@@ -257,13 +262,41 @@ const formConfig = {
           uiSchema: uploadPtsdDocuments.uiSchema,
           schema: uploadPtsdDocuments.schema,
         },
-        ptsdSecondaryDate: {
-          title: 'Event Date - 781a',
-          path: 'new-disabilities/ptsd-781a-event-date',
+        ptsdFormIntro: {
+          title: 'Incident Date - 781a',
+          path: 'new-disabilities/ptsd-781a-incident-date',
           depends: formData =>
-            hasNewPtsdDisability(formData) && needsToEnter781(formData),
+            hasNewPtsdDisability(formData) &&
+            needsToEnter781(formData) &&
+            isAnsweringPtsdForm(formData),
+          uiSchema: ptsdFormIntro.uiSchema,
+          schema: ptsdFormIntro.schema,
+        },
+        ptsdIncidentDate: {
+          title: 'Incident Date - 781',
+          path: 'new-disabilities/ptsd-781a-incident-date',
+          depends: formData =>
+            hasNewPtsdDisability(formData) && needsToEnter781a(formData),
           uiSchema: ptsdSecondaryDate.uiSchema,
           schema: ptsdSecondaryDate.schema,
+        },
+        ptsdSecondaryFormIntro: {
+          title: 'Incident Date - 781a',
+          path: 'new-disabilities/ptsd-781a-incident-date',
+          depends: formData =>
+            hasNewPtsdDisability(formData) &&
+            needsToEnter781(formData) &&
+            isAnsweringPtsdForm(formData),
+          uiSchema: ptsdSecondaryFormIntro.uiSchema,
+          schema: ptsdSecondaryFormIntro.schema,
+        },
+        ptsdSecondaryDate: {
+          title: 'Event Date - 781a',
+          path: 'new-disabilities/ptsd-781-incident-date',
+          depends: formData =>
+            hasNewPtsdDisability(formData) && needsToEnter781(formData),
+          uiSchema: ptsdIncidentDate.uiSchema,
+          schema: ptsdIncidentDate.schema,
         },
         summaryOfDisabilities: {
           title: 'Summary of disabilities',
