@@ -272,4 +272,4 @@ export const isUploadingPtsdForm = formData =>
   _.get('view:uploadPtsdChoice', formData, '') === 'upload';
 
 export const isAnsweringPtsdForm = formData =>
-  _.get('view:uploadPtsdChoice', formData, '') === 'answer';
+  _.get('view:uploadPtsdChoice', formData, '') === 'answerQuestions';

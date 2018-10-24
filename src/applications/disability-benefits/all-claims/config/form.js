@@ -264,7 +264,7 @@ const formConfig = {
         },
         ptsdFormIntro: {
           title: 'Incident Date - 781a',
-          path: 'new-disabilities/ptsd-781a-incident-date',
+          path: 'new-disabilities/ptsd-781-intro',
           depends: formData =>
             hasNewPtsdDisability(formData) &&
             needsToEnter781(formData) &&
@@ -274,27 +274,31 @@ const formConfig = {
         },
         ptsdIncidentDate: {
           title: 'Incident Date - 781',
-          path: 'new-disabilities/ptsd-781a-incident-date',
+          path: 'new-disabilities/ptsd-781-incident-date',
           depends: formData =>
-            hasNewPtsdDisability(formData) && needsToEnter781a(formData),
+            hasNewPtsdDisability(formData) &&
+            needsToEnter781(formData) &&
+            isAnsweringPtsdForm(formData),
           uiSchema: ptsdSecondaryDate.uiSchema,
           schema: ptsdSecondaryDate.schema,
         },
         ptsdSecondaryFormIntro: {
+          title: 'Incident Date - 781a',
+          path: 'new-disabilities/ptsd-781a-intro',
+          depends: formData =>
+            hasNewPtsdDisability(formData) &&
+            needsToEnter781a(formData) &&
+            isAnsweringPtsdForm(formData),
+          uiSchema: ptsdSecondaryFormIntro.uiSchema,
+          schema: ptsdSecondaryFormIntro.schema,
+        },
+        ptsdSecondaryDate: {
           title: 'Incident Date - 781a',
           path: 'new-disabilities/ptsd-781a-incident-date',
           depends: formData =>
             hasNewPtsdDisability(formData) &&
             needsToEnter781(formData) &&
             isAnsweringPtsdForm(formData),
-          uiSchema: ptsdSecondaryFormIntro.uiSchema,
-          schema: ptsdSecondaryFormIntro.schema,
-        },
-        ptsdSecondaryDate: {
-          title: 'Event Date - 781a',
-          path: 'new-disabilities/ptsd-781-incident-date',
-          depends: formData =>
-            hasNewPtsdDisability(formData) && needsToEnter781(formData),
           uiSchema: ptsdIncidentDate.uiSchema,
           schema: ptsdIncidentDate.schema,
         },

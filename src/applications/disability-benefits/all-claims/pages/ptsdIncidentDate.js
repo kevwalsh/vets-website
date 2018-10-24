@@ -7,10 +7,10 @@ import currentOrPastDateUI from 'us-forms-system/lib/js/definitions/currentOrPas
 
 export const uiSchema = {
   'ui:title': ({ formData }) => (
-    <PtsdNameTitle formData={formData} formType="781a" />
+    <PtsdNameTitle formData={formData} formType="781" />
   ),
   'ui:description': dateDescription,
-  secondaryIncidentDate: currentOrPastDateUI(' '),
+  incidentDate: currentOrPastDateUI(' '),
 };
 
 export const schema = {
