@@ -1,5 +1,5 @@
 import React from 'react';
-import { secondaryDateDescription } from '../content/ptsdIncidentDate';
+import { dateDescription } from '../content/ptsdIncidentDate';
 
 import { PtsdNameTitle } from '../content/ptsdClassification';
 
@@ -9,14 +9,14 @@ export const uiSchema = {
   'ui:title': ({ formData }) => (
     <PtsdNameTitle formData={formData} formType="781a" />
   ),
-  'ui:description': secondaryDateDescription,
+  'ui:description': dateDescription,
   secondaryIncidentDate: currentOrPastDateUI(' '),
 };
 
 export const schema = {
   type: 'object',
   properties: {
-    secondaryIncidentDate: {
+    incidentDate: {
       type: 'string',
     },
   },
