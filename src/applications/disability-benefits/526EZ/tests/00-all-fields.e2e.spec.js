@@ -65,13 +65,13 @@ const runTest = E2eHelpers.createE2eTest(client => {
     );
 
     // VA Facilities
-    client.axeCheck('.main');
-    PageHelpers.completeVAFacilitiesInformation(client, testData.data);
-    client.click('.form-panel .usa-button-primary');
-    E2eHelpers.expectNavigateAwayFrom(
-      client,
-      '/supporting-evidence/0/va-facilities',
-    );
+    // client.axeCheck('.main');
+    // PageHelpers.completeVAFacilitiesInformation(client, testData.data);
+    // client.click('.form-panel .usa-button-primary');
+    // E2eHelpers.expectNavigateAwayFrom(
+    //   client,
+    //   '/supporting-evidence/0/va-facilities',
+    // );
 
     // Private Medical Records Intro
     client.axeCheck('.main').click('.form-panel .usa-button-primary');
@@ -81,14 +81,14 @@ const runTest = E2eHelpers.createE2eTest(client => {
     );
 
     // Records Release
-    E2eHelpers.expectLocation(
-      client,
-      '/supporting-evidence/0/private-medical-records-release',
-    );
-    client.axeCheck('.main');
-    PageHelpers.completeRecordReleaseInformation(client, testData.data);
-    client.click('.usa-button-primary');
-    E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
+    // E2eHelpers.expectLocation(
+    //   client,
+    //   '/supporting-evidence/0/private-medical-records-release',
+    // );
+    // client.axeCheck('.main');
+    // PageHelpers.completeRecordReleaseInformation(client, testData.data);
+    // client.click('.usa-button-primary');
+    // E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
 
     // Record upload
     E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
