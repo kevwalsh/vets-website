@@ -3,10 +3,20 @@ const Timeouts = require('../../../../platform/testing/e2e/timeouts');
 const PageHelpers = require('./disability-benefits-helpers');
 const testData = require('./schema/maximal-test.json');
 const FormsTestHelpers = require('../../../../platform/testing/e2e/form-helpers');
+const Auth = require('../../../../platform/testing/e2e/auth');
 
 const runTest = E2eHelpers.createE2eTest(client => {
   PageHelpers.initDocumentUploadMock();
   PageHelpers.initApplicationSubmitMock();
+
+  const token = Auth.getUserToken();
+
+  Auth.logIn(
+    token,
+    client,
+    '/disability-benefits/apply/form-526-disability-claim',
+    3,
+  );
 
   // Ensure introduction page renders.
   client
@@ -16,11 +26,12 @@ const runTest = E2eHelpers.createE2eTest(client => {
       }/disability-benefits/apply/form-526-disability-claim`,
     )
     .waitForElementVisible('body', Timeouts.normal)
-    .waitForElementVisible('.schemaform-title', Timeouts.slow) // First render of React may be slow.
+    .waitForElementVisible(
+      '.schemaform-intro .usa-button-primary',
+      Timeouts.slow,
+    ) // First render of React may be slow.
+    .assert.title('Apply for increased disability benefits: Vets.gov')
     .click('.schemaform-intro .usa-button-primary');
-
-  // Gets hung up at the login screen
-
   E2eHelpers.overrideVetsGovApi(client);
   FormsTestHelpers.overrideFormsScrolling(client);
   E2eHelpers.expectNavigateAwayFrom(client, '/introduction');

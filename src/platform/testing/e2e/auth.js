@@ -62,6 +62,7 @@ function initUserMock(token, level) {
             'health-records',
             'rx',
             'messaging',
+            'claim_increase',
           ],
           va_profile: {
             status: 'OK',
