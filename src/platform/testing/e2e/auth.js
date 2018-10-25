@@ -63,6 +63,7 @@ function initUserMock(token, level) {
             'rx',
             'messaging',
             'claim_increase',
+            'claim-increase-available',
           ],
           va_profile: {
             status: 'OK',
