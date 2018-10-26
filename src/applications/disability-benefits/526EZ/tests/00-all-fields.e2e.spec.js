@@ -32,7 +32,10 @@ const runTest = E2eHelpers.createE2eTest(client => {
       Timeouts.slow,
     ) // First render of React may be slow.
     .assert.title('Apply for increased disability benefits: Vets.gov')
-    .click('.schemaform-intro .usa-button-primary');
+    .click('.schemaform-intro .usa-button-primary')
+    .waitForElementVisible('.va-alert-title', Timeouts.normal)
+    .click('.usa-grid .usa-button-primary');
+
   E2eHelpers.overrideVetsGovApi(client);
   FormsTestHelpers.overrideFormsScrolling(client);
   E2eHelpers.expectNavigateAwayFrom(client, '/introduction');
