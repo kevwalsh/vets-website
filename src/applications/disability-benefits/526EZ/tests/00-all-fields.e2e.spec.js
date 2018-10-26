@@ -6,10 +6,11 @@ const FormsTestHelpers = require('../../../../platform/testing/e2e/form-helpers'
 const Auth = require('../../../../platform/testing/e2e/auth');
 
 const runTest = E2eHelpers.createE2eTest(client => {
+  const token = Auth.getUserToken();
+
   PageHelpers.initDocumentUploadMock();
   PageHelpers.initApplicationSubmitMock();
-
-  const token = Auth.getUserToken();
+  PageHelpers.initItfMock(token);
 
   Auth.logIn(
     token,
