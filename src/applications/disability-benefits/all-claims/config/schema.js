@@ -508,6 +508,7 @@ const schema = {
     },
     address: baseAddressDef,
     vaTreatmentCenterAddress: vaTreatmentCenterAddressDef,
+    centralMailAddress: baseAddressDef,
     dateRangeAllRequired: {
       type: 'object',
       properties: {
@@ -566,7 +567,7 @@ const schema = {
                 $ref: '#/definitions/dateRange',
               },
               providerFacilityAddress: {
-                $ref: '#/definitions/address',
+                $ref: '#/definitions/centralMailAddress',
               },
             },
           },
