@@ -15,7 +15,7 @@ export const uiSchema = {
   ptsd781: fileUploadUI('', {
     itemDescription: 'PTSD 781 form',
     hideLabelText: true,
-    fileUploadUrl: `${environment.API_URL}/v0`,
+    fileUploadUrl: `${environment.API_URL}/v0/upload_supporting_evidence`,
     fileTypes: [
       'pdf',
       'jpg',
@@ -30,7 +30,7 @@ export const uiSchema = {
     maxSize: FIFTY_MB,
     createPayload: file => {
       const payload = new FormData();
-      payload.append('disability_details_attachment[file_data]', file);
+      payload.append('supporting_evidence_attachment[file_data]', file);
 
       return payload;
     },
