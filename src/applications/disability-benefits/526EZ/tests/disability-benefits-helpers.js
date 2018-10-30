@@ -10,6 +10,28 @@ function completeApplicantInformation(client, data) {
     .selectDropdown('root_serviceBranch', data.serviceBranch);
 }
 
+function completeVeteranAddressInformation(client, data) {
+  const { primaryPhone, emailAddress } = data.veteran.phoneEmailCard;
+  const { addressLine1, city, state, zipCode } = data.veteran.mailingAddress;
+
+  client
+    .fill(
+      'input[name="root_veteran_phoneEmailCard_primaryPhone"]',
+      primaryPhone,
+    )
+    .fill(
+      'input[name="root_veteran_phoneEmailCard_emailAddress"]',
+      emailAddress,
+    )
+    .fill(
+      'input[name="root_veteran_mailingAddress_addressLine1"]',
+      addressLine1,
+    )
+    .fill('input[name="root_veteran_mailingAddress_city"]', city)
+    .selectDropdown('root_veteran_mailingAddress_state', state)
+    .fill('input[name="root_veteran_mailingAddress_zipCode"]', zipCode);
+}
+
 function selectDisabilities(client) {
   client.fillCheckbox('input[name="root_disabilities_0"]', true);
 }
@@ -230,6 +252,7 @@ module.exports = {
   initDocumentUploadMock,
   initItfMock,
   completeApplicantInformation,
+  completeVeteranAddressInformation,
   selectDisabilities,
   completeEvidenceTypeInformation,
   completeVAFacilitiesInformation,
