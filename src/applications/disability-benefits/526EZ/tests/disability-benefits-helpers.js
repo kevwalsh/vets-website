@@ -32,6 +32,19 @@ function completeVeteranAddressInformation(client, data) {
     .fill('input[name="root_veteran_mailingAddress_zipCode"]', zipCode);
 }
 
+function completeMedicalHistory(client, data) {
+  data.servicePeriods.forEach((period, i, list) => {
+    const { serviceBranch, dateRange } = data.servicePeriods[i];
+
+    client
+      .selectDropdown(`root_servicePeriods_${i}_serviceBranch`, serviceBranch)
+      .fillDate(`root_servicePeriods_${i}_dateRange_from`, dateRange.from)
+      .fillDate(`root_servicePeriods_${i}_dateRange_to`, dateRange.to);
+
+    if (i < list.length - 1) client.click('.va-growable-add-btn');
+  });
+}
+
 function selectDisabilities(client) {
   client.fillCheckbox('input[name="root_disabilities_0"]', true);
 }
@@ -253,6 +266,7 @@ module.exports = {
   initItfMock,
   completeApplicantInformation,
   completeVeteranAddressInformation,
+  completeMedicalHistory,
   selectDisabilities,
   completeEvidenceTypeInformation,
   completeVAFacilitiesInformation,
