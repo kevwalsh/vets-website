@@ -42,11 +42,8 @@ const runTest = E2eHelpers.createE2eTest(client => {
 
   // Review Veteran Information
   client.axeCheck('.main');
-  client.click('.edit-btn');
-  PageHelpers.completeApplicantInformation(client, testData.data);
-  client.click('button[id="5-continueButton"]');
   client.click('.form-progress-buttons .usa-button-primary');
-  E2eHelpers.expectNavigateAwayFrom(client, '/review-veteran-information');
+  E2eHelpers.expectNavigateAwayFrom(client, '/veteran-information');
 
   // Rated disability selection
   client.axeCheck('.main');
