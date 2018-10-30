@@ -62,6 +62,10 @@ const runTest = E2eHelpers.createE2eTest(client => {
   client.click('.form-progress-buttons .usa-button-primary');
   E2eHelpers.expectNavigateAwayFrom(client, '/military-service-history');
 
+  // Payment Information
+  client.axeCheck('.main');
+  client.click('.form-progress-buttons .usa-button-primary');
+  E2eHelpers.expectNavigateAwayFrom(client, '/payment-information');
   PageHelpers.selectDisabilities(client); // Just selects the first one in the list
   client.click('.form-panel .usa-button-primary');
 
