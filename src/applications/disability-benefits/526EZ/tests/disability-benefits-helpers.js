@@ -45,6 +45,26 @@ function completeMedicalHistory(client, data) {
   });
 }
 
+function completeReservesNationalGuardInfo(client, data) {
+  const { unitName, servicePeriods } = data;
+
+  const activePeriod = servicePeriods.find(
+    period => period.serviceBranch === 'Army Reserve',
+  );
+
+  client
+    .fill('input[name="root_unitName"]', unitName)
+    .fillDate(
+      'root_obligationTermOfServiceDateRange_from',
+      activePeriod.dateRange.from,
+    )
+    .fillDate(
+      'root_obligationTermOfServiceDateRange_to',
+      activePeriod.dateRange.to,
+    )
+    .selectYesNo('root_waiveVABenefitsToRetainTrainingPay', false);
+}
+
 function selectDisabilities(client) {
   client.fillCheckbox('input[name="root_disabilities_0"]', true);
 }
@@ -267,6 +287,7 @@ module.exports = {
   completeApplicantInformation,
   completeVeteranAddressInformation,
   completeMedicalHistory,
+  completeReservesNationalGuardInfo,
   selectDisabilities,
   completeEvidenceTypeInformation,
   completeVAFacilitiesInformation,
