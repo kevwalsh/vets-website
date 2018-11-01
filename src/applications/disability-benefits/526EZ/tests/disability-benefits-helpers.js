@@ -10,6 +10,18 @@ function completeApplicantInformation(client, data) {
     .selectDropdown('root_serviceBranch', data.serviceBranch);
 }
 
+function completeMilitaryHistory(client, data) {
+  data.servicePeriods.forEach((period, i, list) => {
+    const { serviceBranch, dateRange } = data.servicePeriods[i];
+
+    client
+      .selectDropdown(`root_servicePeriods_${i}_serviceBranch`, serviceBranch)
+      .fillDate(`root_servicePeriods_${i}_dateRange_from`, dateRange.from)
+      .fillDate(`root_servicePeriods_${i}_dateRange_to`, dateRange.to);
+
+    if (i < list.length - 1) client.click('.va-growable-add-btn');
+  });
+}
 function completeVeteranAddressInformation(client, data) {
   const { addressLine1, city, state, zipCode } = data.veteran.mailingAddress;
 
@@ -21,19 +33,6 @@ function completeVeteranAddressInformation(client, data) {
     .fill('input[name="root_veteran_mailingAddress_city"]', city)
     .selectDropdown('root_veteran_mailingAddress_state', state)
     .fill('input[name="root_veteran_mailingAddress_zipCode"]', zipCode);
-}
-
-function completeMedicalHistory(client, data) {
-  data.servicePeriods.forEach((period, i, list) => {
-    const { serviceBranch, dateRange } = data.servicePeriods[i];
-
-    client
-      .selectDropdown(`root_servicePeriods_${i}_serviceBranch`, serviceBranch)
-      .fillDate(`root_servicePeriods_${i}_dateRange_from`, dateRange.from)
-      .fillDate(`root_servicePeriods_${i}_dateRange_to`, dateRange.to);
-
-    if (i < list.length - 1) client.click('.va-growable-add-btn');
-  });
 }
 
 function completeReservesNationalGuardInfo(client, data) {
@@ -392,7 +391,7 @@ module.exports = {
   initPaymentInformationMock,
   completeApplicantInformation,
   completeVeteranAddressInformation,
-  completeMedicalHistory,
+  completeMilitaryHistory,
   completeReservesNationalGuardInfo,
   completeHomelessness,
   selectDisabilities,
