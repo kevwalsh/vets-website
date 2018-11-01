@@ -197,6 +197,61 @@ function completePrivateMedicalRecordsChoice(client, data) {
   );
 }
 
+function initInProgressMock(token) {
+  mock(token, {
+    path: '/v0/in_progress_forms/21-526EZ',
+    verb: 'get',
+    value: {
+      formData: {
+        veteran: {
+          primaryPhone: '4445551212',
+          emailAddress: 'test2@test1.net',
+        },
+        disabilities: [
+          {
+            name: 'Diabetes mellitus0',
+            ratedDisabilityId: '0',
+            ratingDecisionId: '63655',
+            diagnosticCode: 5238,
+            decisionCode: 'SVCCONNCTED',
+            decisionText: 'Service Connected',
+            ratingPercentage: 100,
+          },
+          {
+            name: 'Diabetes mellitus1',
+            ratedDisabilityId: '1',
+            ratingDecisionId: '63655',
+            diagnosticCode: 5238,
+            decisionCode: 'SVCCONNCTED',
+            decisionText: 'Service Connected',
+            ratingPercentage: 100,
+          },
+        ],
+        servicePeriods: [
+          {
+            serviceBranch: 'Air Force Reserve',
+            dateRange: {
+              from: '2001-03-21',
+              to: '2014-07-21',
+            },
+          },
+        ],
+        reservesNationalGuardService: {
+          obligationTermOfServiceDateRange: {
+            from: '2007-05-22',
+            to: '2008-06-05',
+          },
+        },
+      },
+      metadata: {
+        version: 0,
+        prefill: true,
+        returnUrl: '/veteran-information',
+      },
+    },
+  });
+}
+
 function initApplicationSubmitMock() {
   mock(null, {
     path: '/v0/21-526EZ',
@@ -339,6 +394,7 @@ function initPaymentInformationMock(token) {
 }
 
 module.exports = {
+  initInProgressMock,
   initApplicationSubmitMock,
   initDocumentUploadMock,
   initItfMock,
