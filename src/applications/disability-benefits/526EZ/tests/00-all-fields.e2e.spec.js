@@ -67,6 +67,12 @@ const runTest = E2eHelpers.createE2eTest(client => {
   client.axeCheck('.main');
   client.click('.form-progress-buttons .usa-button-primary');
   E2eHelpers.expectNavigateAwayFrom(client, '/payment-information');
+
+  // Homelessness
+  client.axeCheck('.main');
+  PageHelpers.completeHomelessness(client, testData.data);
+  client.click('.form-progress-buttons .usa-button-primary');
+  E2eHelpers.expectNavigateAwayFrom(client, '/special-circumstances');
   PageHelpers.selectDisabilities(client); // Just selects the first one in the list
   client.click('.form-panel .usa-button-primary');
 

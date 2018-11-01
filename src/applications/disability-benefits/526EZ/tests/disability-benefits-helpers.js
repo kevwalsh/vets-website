@@ -65,6 +65,13 @@ function completeReservesNationalGuardInfo(client, data) {
     .selectYesNo('root_waiveVABenefitsToRetainTrainingPay', false);
 }
 
+function completeHomelessness(client, data) {
+  client.selectYesNo(
+    'root_veteran_homelessness_isHomeless',
+    data.veteran.homelessness.isHomeless,
+  );
+}
+
 function selectDisabilities(client) {
   client.fillCheckbox('input[name="root_disabilities_0"]', true);
 }
@@ -340,6 +347,7 @@ module.exports = {
   completeVeteranAddressInformation,
   completeMedicalHistory,
   completeReservesNationalGuardInfo,
+  completeHomelessness,
   selectDisabilities,
   completeEvidenceTypeInformation,
   completeVAFacilitiesInformation,
