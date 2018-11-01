@@ -11,6 +11,7 @@ const runTest = E2eHelpers.createE2eTest(client => {
   PageHelpers.initDocumentUploadMock();
   PageHelpers.initApplicationSubmitMock();
   PageHelpers.initItfMock(token);
+  PageHelpers.initPaymentInformationMock(token);
 
   Auth.logIn(
     token,
