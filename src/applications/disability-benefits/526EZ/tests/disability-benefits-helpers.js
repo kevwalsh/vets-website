@@ -11,18 +11,9 @@ function completeApplicantInformation(client, data) {
 }
 
 function completeVeteranAddressInformation(client, data) {
-  const { primaryPhone, emailAddress } = data.veteran.phoneEmailCard;
   const { addressLine1, city, state, zipCode } = data.veteran.mailingAddress;
 
   client
-    .fill(
-      'input[name="root_veteran_phoneEmailCard_primaryPhone"]',
-      primaryPhone,
-    )
-    .fill(
-      'input[name="root_veteran_phoneEmailCard_emailAddress"]',
-      emailAddress,
-    )
     .fill(
       'input[name="root_veteran_mailingAddress_addressLine1"]',
       addressLine1,

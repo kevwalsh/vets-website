@@ -29,13 +29,12 @@ const runTest = E2eHelpers.createE2eTest(client => {
       }/disability-benefits/apply/form-526-disability-claim`,
     )
     .waitForElementVisible('body', Timeouts.normal)
-    .waitForElementVisible(
-      '.schemaform-intro .usa-button-primary',
-      Timeouts.slow,
-    ) // First render of React may be slow.
-    .assert.title('Apply for increased disability benefits: Vets.gov')
+    // First render of React may be slow.
+    .waitForElementVisible('.schemaform-title', Timeouts.slow)
+    // .assert.title('Apply for increased disability benefits: Vets.gov')
     .click('.schemaform-intro .usa-button-primary')
-    .waitForElementVisible('.va-alert-title', Timeouts.normal)
+    // Click past the `You already have an Intent to File` screen.
+    .waitForElementVisible('.usa-grid .usa-button-primary', Timeouts.normal)
     .click('.usa-grid .usa-button-primary');
 
   E2eHelpers.overrideVetsGovApi(client);
@@ -55,7 +54,6 @@ const runTest = E2eHelpers.createE2eTest(client => {
 
   // Military Service History
   client.axeCheck('.main');
-  PageHelpers.completeMedicalHistory(client, testData.data);
   client.click('.form-progress-buttons .usa-button-primary');
 
   // Reserves/National Guard Info
