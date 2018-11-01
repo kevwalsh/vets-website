@@ -8,6 +8,7 @@ const Auth = require('../../../../platform/testing/e2e/auth');
 const runTest = E2eHelpers.createE2eTest(client => {
   const token = Auth.getUserToken();
 
+  PageHelpers.initInProgressMock(token);
   PageHelpers.initDocumentUploadMock();
   PageHelpers.initApplicationSubmitMock();
   PageHelpers.initItfMock(token);
