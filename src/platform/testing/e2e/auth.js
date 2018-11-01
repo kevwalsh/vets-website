@@ -52,7 +52,7 @@ function initUserMock(token, level) {
               metadata: {},
             },
           ],
-          prefills_available: [],
+          prefills_available: ['21-526EZ'],
           services: [
             'facilities',
             'hca',
