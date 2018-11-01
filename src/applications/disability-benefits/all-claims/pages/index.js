@@ -158,6 +158,11 @@ import {
   schema as fullyDevelopedClaimSchema,
 } from './fullyDevelopedClaim';
 
+import {
+  uiSchema as newUnemploymentFollowUpUISchema,
+  schema as newUnemploymentFollowUpSchema,
+} from './newUnemploymentFollowUp';
+
 export const alternateNames = {
   uiSchema: alternateNamesUISchema,
   schema: alternateNamesSchema,
@@ -316,4 +321,9 @@ export const vaEmployee = {
 export const fullyDevelopedClaim = {
   uiSchema: fullyDevelopedClaimUiSchema,
   schema: fullyDevelopedClaimSchema,
+};
+
+export const newUnemploymentFollowUp = {
+  uiSchema: newUnemploymentFollowUpUISchema,
+  schema: newUnemploymentFollowUpSchema,
 };

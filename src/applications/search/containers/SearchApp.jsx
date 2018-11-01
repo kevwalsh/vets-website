@@ -10,6 +10,7 @@ import recordEvent from '../../../platform/monitoring/record-event';
 import LoadingIndicator from '@department-of-veterans-affairs/formation/LoadingIndicator';
 import IconSearch from '@department-of-veterans-affairs/formation/IconSearch';
 import Pagination from '@department-of-veterans-affairs/formation/Pagination';
+import AlertBox from '@department-of-veterans-affairs/formation/AlertBox';
 
 class SearchApp extends React.Component {
   static propTypes = {
@@ -45,13 +46,18 @@ class SearchApp extends React.Component {
     const { userInput, page } = this.state;
     if (userInput) {
       this.props.fetchSearchResults(userInput, page);
+      this.writeBreadcrumb();
     }
   }
 
-  handleInputChange = event => {
-    this.setState({
-      userInput: event.target.value,
-    });
+  componentDidUpdate(prevProps) {
+    if (this.props.search.query !== prevProps.search.query) {
+      this.writeBreadcrumb();
+    }
+  }
+
+  handlePageChange = page => {
+    this.setState({ page }, () => this.handleSearch());
   };
 
   handleSearch = e => {
@@ -67,34 +73,117 @@ class SearchApp extends React.Component {
     this.props.fetchSearchResults(userInput, page);
   };
 
-  handlePageChange = page => {
-    this.setState({ page }, () => this.handleSearch());
+  handleInputChange = event => {
+    this.setState({
+      userInput: event.target.value,
+    });
   };
 
-  /* eslint-disable react/no-danger */
-  renderWebResult(result) {
-    return (
-      <li key={result.url} className="result-item">
-        <a className="result-title" href={result.url}>
-          <h5
-            dangerouslySetInnerHTML={{
-              __html: formatResponseString(result.title, true),
-            }}
-          />
-        </a>
-        <p className="result-url">{result.url}</p>
-        <p
-          className="result-desc"
-          dangerouslySetInnerHTML={{
-            __html: formatResponseString(result.snippet),
-          }}
-        />
-      </li>
-    );
+  writeBreadcrumb() {
+    const breadcrumbList = document.getElementById('va-breadcrumbs-list');
+    const lastCrumb = breadcrumbList.lastElementChild.children[0];
+    if (breadcrumbList && lastCrumb) {
+      lastCrumb.text = `Search Results for '${this.props.search.query}'`;
+    }
   }
-  /* eslint-enable react/no-danger */
 
   renderResults() {
+    const { loading, errors } = this.props.search;
+    const hasErrors = !!(errors && errors.length > 0);
+    const nonBlankUserInput =
+      this.state.userInput &&
+      this.state.userInput.replace(/\s/g, '').length > 0;
+
+    // Reusable search input
+    const searchInput = (
+      <form onSubmit={this.handleSearch} className="va-flex search-box">
+        <input
+          type="text"
+          name="query"
+          value={this.state.userInput}
+          onChange={this.handleInputChange}
+        />
+        <button type="submit" disabled={!nonBlankUserInput}>
+          <IconSearch color="#fff" />
+          <span>Search</span>
+        </button>
+      </form>
+    );
+
+    if (hasErrors && !loading) {
+      return (
+        <div className="usa-width-three-fourths medium-8 small-12 columns error">
+          <AlertBox
+            status="error"
+            headline="Your search didn't go through"
+            content="We’re sorry. Something went wrong on our end, and your search didn't go through. Please try again."
+          />
+          {searchInput}
+        </div>
+      );
+    }
+
+    return (
+      <div className="usa-width-three-fourths medium-8 small-12 columns">
+        {searchInput}
+        {this.renderResultsCount()}
+        <hr />
+        {this.renderRecommendedResults()}
+        {this.renderResultsList()}
+        <hr id="hr-search-bottom" />
+        {this.renderResultsFooter()}
+      </div>
+    );
+  }
+
+  renderRecommendedResults() {
+    const { loading, recommendedResults } = this.props.search;
+    if (!loading && recommendedResults && recommendedResults.length > 0) {
+      return (
+        <div>
+          <h4>Our Top Recommendations for You</h4>
+          <ul className="results-list">
+            {recommendedResults.map(r =>
+              this.renderWebResult(r, 'description'),
+            )}
+          </ul>
+          <hr />
+        </div>
+      );
+    }
+
+    return null;
+  }
+
+  renderResultsCount() {
+    const {
+      currentPage,
+      perPage,
+      totalPages,
+      totalEntries,
+      loading,
+    } = this.props.search;
+
+    let resultRangeEnd = currentPage * perPage;
+
+    if (currentPage === totalPages) {
+      resultRangeEnd = totalEntries;
+    }
+
+    const resultRangeStart = (currentPage - 1) * perPage + 1;
+
+    if (loading || !totalEntries) return null;
+
+    /* eslint-disable prettier/prettier */
+    return (
+      <p>
+        Showing {totalEntries === 0 ? '0' : `${resultRangeStart}-${resultRangeEnd}`} of {totalEntries} results
+      </p>
+    );
+    /* eslint-enable prettier/prettier */
+  }
+
+  renderResultsList() {
     const { results, loading } = this.props.search;
 
     if (loading) {
@@ -116,6 +205,29 @@ class SearchApp extends React.Component {
     );
   }
 
+  /* eslint-disable react/no-danger */
+  renderWebResult(result, snippetKey = 'snippet') {
+    return (
+      <li key={result.url} className="result-item">
+        <a className="result-title" href={result.url}>
+          <h5
+            dangerouslySetInnerHTML={{
+              __html: formatResponseString(result.title, true),
+            }}
+          />
+        </a>
+        <p className="result-url">{result.url}</p>
+        <p
+          className="result-desc"
+          dangerouslySetInnerHTML={{
+            __html: formatResponseString(result[snippetKey]),
+          }}
+        />
+      </li>
+    );
+  }
+  /* eslint-enable react/no-danger */
+
   renderResultsFooter() {
     const { currentPage, totalPages } = this.props.search;
 
@@ -126,34 +238,10 @@ class SearchApp extends React.Component {
           onPageSelect={this.handlePageChange}
           page={currentPage}
           pages={totalPages}
+          maxPageListLength={5}
         />
       </div>
     );
-  }
-
-  renderResultsCount() {
-    const {
-      currentPage,
-      perPage,
-      totalPages,
-      totalEntries,
-    } = this.props.search;
-
-    let resultRangeEnd = currentPage * perPage;
-
-    if (currentPage === totalPages) {
-      resultRangeEnd = totalEntries;
-    }
-
-    const resultRangeStart = (currentPage - 1) * perPage + 1;
-
-    /* eslint-disable prettier/prettier */
-    return (
-      <p>
-        Showing {`${resultRangeStart}-${resultRangeEnd}`} of {totalEntries} results
-      </p>
-    );
-    /* eslint-enable prettier/prettier */
   }
 
   render() {
@@ -165,25 +253,7 @@ class SearchApp extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="usa-width-three-fourths medium-8 small-12 columns">
-            <form onSubmit={this.handleSearch} className="va-flex search-box">
-              <input
-                type="text"
-                name="query"
-                value={this.state.userInput}
-                onChange={this.handleInputChange}
-              />
-              <button type="submit">
-                <IconSearch color="#fff" />
-                <span>Search</span>
-              </button>
-            </form>
-            {this.renderResultsCount()}
-            <hr />
-            {this.renderResults()}
-            <hr />
-            {this.renderResultsFooter()}
-          </div>
+          {this.renderResults()}
           <div className="usa-width-one-fourth medium-4 small-12 columns sidebar">
             <h4 className="highlight">More VA Search Tools</h4>
             <ul>
