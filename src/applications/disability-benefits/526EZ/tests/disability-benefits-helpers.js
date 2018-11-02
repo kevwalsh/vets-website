@@ -84,13 +84,20 @@ function completeEvidenceTypeInformation(client, data) {
   // );
 }
 
+function completePrivateMedicalRecordsChoice(client, data) {
+  const pmrChoice = data.disabilities[0]['view:uploadPrivateRecords'];
+  const acknowledgementChoice =
+    data.disabilities[0]['view:patientAcknowledgement'];
+
+  client
+    .selectRadio('root_view:uploadPrivateRecords', pmrChoice)
     .fillCheckbox(
-      'input[name="root_view:privateMedicalRecords"]',
-      data.disabilities[0]['view:privateMedicalRecords'],
+      'input[name="root_view:patientAcknowledgement_view:acknowledgement"]',
+      acknowledgementChoice['view:acknowledgement'],
     )
     .fillCheckbox(
-      'input[name="root_view:otherEvidence"]',
-      data.disabilities[0]['view:otherEvidence'],
+      'input[name="root_view:patientAcknowledgement_view:acknowledgement"]',
+      acknowledgementChoice['view:acknowledgement'],
     );
 }
 
@@ -190,13 +197,6 @@ function completeRecordReleaseInformation(client, data) {
       );
     if (i < list.length - 1) client.click('.va-growable-add-btn');
   });
-}
-
-function completePrivateMedicalRecordsChoice(client, data) {
-  client.selectRadio(
-    'root_view:uploadPrivateRecords',
-    data.disabilities[0]['view:uploadPrivateRecords'],
-  );
 }
 
 function initInProgressMock(token) {
