@@ -1,6 +1,7 @@
 const mock = require('../../../../platform/testing/e2e/mock-helpers');
 const Timeouts = require('../../../../platform/testing/e2e/timeouts.js');
 
+// Unused?
 function completeApplicantInformation(client, data) {
   client
     .fillName('root_fullName', data.fullName)
@@ -22,6 +23,8 @@ function completeMilitaryHistory(client, data) {
     if (i < list.length - 1) client.click('.va-growable-add-btn');
   });
 }
+
+// Used.
 function completeVeteranAddressInformation(client, data) {
   const { addressLine1, city, state, zipCode } = data.veteran.mailingAddress;
 

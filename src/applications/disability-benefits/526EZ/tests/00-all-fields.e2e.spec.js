@@ -84,7 +84,7 @@ const runTest = E2eHelpers.createE2eTest(client => {
   client.axeCheck('.main').click('.form-panel .usa-button-primary');
   E2eHelpers.expectNavigateAwayFrom(client, '/supporting-evidence/orientation');
 
-  // Evidence Type -- first condition
+  // Evidence Type
   client.axeCheck('.main');
   E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-type');
   PageHelpers.completeEvidenceTypeInformation(client, testData.data);
@@ -110,7 +110,8 @@ const runTest = E2eHelpers.createE2eTest(client => {
   //   '/supporting-evidence/0/va-facilities',
   // );
 
-  // Private Medical Records Intro
+  // Private Medical Records
+  // Intro
   client.axeCheck('.main').click('.form-panel .usa-button-primary');
   E2eHelpers.expectNavigateAwayFromExact(
     client,
