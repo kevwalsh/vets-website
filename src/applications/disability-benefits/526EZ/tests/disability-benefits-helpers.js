@@ -67,11 +67,23 @@ function selectDisabilities(client) {
 }
 
 function completeEvidenceTypeInformation(client, data) {
+  const evidenceTypes = data.disabilities[0]['view:selectableEvidenceTypes'];
+
   client
+    // .fillCheckbox(
+    //   'input[name="root_view:selectableEvidenceTypes_view:vaMedicalRecords"]',
+    //   evidenceTypes['view:vaMedicalRecords'],
+    // )
     .fillCheckbox(
-      'input[name="root_view:vaMedicalRecords"]',
-      data.disabilities[0]['view:vaMedicalRecords'],
-    )
+      'input[name="root_view:selectableEvidenceTypes_view:privateMedicalRecords"]',
+      evidenceTypes['view:privateMedicalRecords'],
+    );
+  // .fillCheckbox(
+  //   'input[name="root_view:selectableEvidenceTypes_view:otherEvidence"]',
+  //   evidenceTypes['view:otherEvidence'],
+  // );
+}
+
     .fillCheckbox(
       'input[name="root_view:privateMedicalRecords"]',
       data.disabilities[0]['view:privateMedicalRecords'],
