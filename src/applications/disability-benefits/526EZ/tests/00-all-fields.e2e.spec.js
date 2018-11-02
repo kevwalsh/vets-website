@@ -117,18 +117,6 @@ const runTest = E2eHelpers.createE2eTest(client => {
     '/supporting-evidence/0/private-medical-records',
   );
 
-  // Records Release
-  // E2eHelpers.expectLocation(
-  //   client,
-  //   '/supporting-evidence/0/private-medical-records-release',
-  // );
-  // client.axeCheck('.main');
-  // PageHelpers.completeRecordReleaseInformation(client, testData.data);
-  // client.click('.usa-button-primary');
-  // E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
-
-  // Record upload
-  E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
   // Patient Acknowledgement
   client.axeCheck('.main');
   PageHelpers.completePrivateMedicalRecordsChoice(client, testData.data);
@@ -139,13 +127,20 @@ const runTest = E2eHelpers.createE2eTest(client => {
   );
 
   // Additional document upload
+  // Release
   E2eHelpers.expectLocation(
     client,
     '/supporting-evidence/0/additionalDocuments',
+    '/supporting-evidence/0/private-medical-records-release',
   );
   client.axeCheck('.main');
+  PageHelpers.completeRecordReleaseInformation(client, testData.data);
   client.click('.form-panel .usa-button-primary');
   E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-summary');
+  E2eHelpers.expectNavigateAwayFrom(
+    client,
+    '/supporting-evidence/0/private-medical-records-release',
+  );
 
   // Evidence Summary
   E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-summary');
