@@ -146,7 +146,11 @@ const runTest = E2eHelpers.createE2eTest(client => {
   E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-summary');
   client.axeCheck('.main');
   client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-type');
+  E2eHelpers.expectNavigateAwayFrom(
+    client,
+    '/supporting-evidence/0/evidence-summary',
+  );
+
 
   // Second Disability Evidence Type
   E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-type');
