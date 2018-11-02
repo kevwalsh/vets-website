@@ -129,11 +129,13 @@ const runTest = E2eHelpers.createE2eTest(client => {
 
   // Record upload
   E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
+  // Patient Acknowledgement
   client.axeCheck('.main');
+  PageHelpers.completePrivateMedicalRecordsChoice(client, testData.data);
   client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectLocation(
+  E2eHelpers.expectNavigateAwayFromExact(
     client,
-    '/supporting-evidence/0/additionalDocuments',
+    '/supporting-evidence/0/private-medical-records',
   );
 
   // Additional document upload
