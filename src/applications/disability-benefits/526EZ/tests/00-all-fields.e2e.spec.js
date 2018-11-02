@@ -31,7 +31,6 @@ const runTest = E2eHelpers.createE2eTest(client => {
     .waitForElementVisible('body', Timeouts.normal)
     // First render of React may be slow.
     .waitForElementVisible('.schemaform-title', Timeouts.slow)
-    // .assert.title('Apply for increased disability benefits: Vets.gov')
     .click('.schemaform-intro .usa-button-primary')
     // Click past the `You already have an Intent to File` screen.
     .waitForElementVisible('.usa-grid .usa-button-primary', Timeouts.normal)
