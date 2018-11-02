@@ -101,8 +101,6 @@ function completePrivateMedicalRecordsChoice(client, data) {
     );
 }
 
-function completeVAFacilitiesInformation(client, data) {
-  data.treatments.forEach((treatment, i, list) => {
 function completeRecordReleaseInformation(client, data) {
   const providerFacilities = data.disabilities[0].providerFacility;
   const limitedConsentChoice = data.disabilities[0]['view:limitedConsent'];
@@ -111,47 +109,30 @@ function completeRecordReleaseInformation(client, data) {
   providerFacilities.forEach((facility, i, list) => {
     client
       .waitForElementVisible(
-        `input[name="root_treatments_${i}_treatment_treatmentCenterName"]`,
         `input[name="root_providerFacility_${i}_providerFacilityName"]`,
         Timeouts.normal,
       )
-      .selectDropdown(
-        `root_treatments_${i}_treatment_startTreatmentMonth`,
-        data.treatments[0].startTreatmentMonth,
       .fill(
         `input[name="root_providerFacility_${i}_providerFacilityName"]`,
         facility.providerFacilityName,
       )
-      .selectDropdown(
-        `root_treatments_${i}_treatment_startTreatmentDay`,
-        data.treatments[0].startTreatmentDay,
       .fillDate(
         `root_providerFacility_${i}_treatmentDateRange_from`,
         facility.treatmentDateRange.from,
       )
-      .fill(
-        `input[name="root_treatments_${i}_treatment_startTreatmentYear"]`,
-        data.treatments[0].startTreatmentYear,
       .fillDate(
         `root_providerFacility_${i}_treatmentDateRange_to`,
         facility.treatmentDateRange.to,
       )
       .selectDropdown(
-        `root_treatments_${i}_treatment_endTreatmentMonth`,
-        data.treatments[0].endTreatmentMonth,
         `root_providerFacility_${i}_providerFacilityAddress_country`,
         facility.providerFacilityAddress.country,
       )
-      .selectDropdown(
-        `root_treatments_${i}_treatment_endTreatmentDay`,
-        data.treatments[0].endTreatmentDay,
       .fill(
         `input[name="root_providerFacility_${i}_providerFacilityAddress_street"]`,
         facility.providerFacilityAddress.street,
       )
       .fill(
-        `input[name="root_treatments_${i}_treatment_endTreatmentYear"]`,
-        data.treatments[0].endTreatmentYear,
         `input[name="root_providerFacility_${i}_providerFacilityAddress_city"]`,
         facility.providerFacilityAddress.city,
       )
@@ -160,8 +141,6 @@ function completeRecordReleaseInformation(client, data) {
         facility.providerFacilityAddress.state,
       )
       .fill(
-        `input[name="root_treatments_${i}_treatment_treatmentCenterName"]`,
-        data.treatments[0].treatmentCenterName,
         `input[name="root_providerFacility_${i}_providerFacilityAddress_postalCode"]`,
         facility.providerFacilityAddress.postalCode,
       );
@@ -181,28 +160,40 @@ function completeRecordReleaseInformation(client, data) {
   });
 }
 
+function completeVAFacilitiesInformation(client, data) {
   data.treatments.forEach((treatment, i, list) => {
     client
       .waitForElementVisible(
+        `input[name="root_treatments_${i}_treatment_treatmentCenterName"]`,
         Timeouts.normal,
       )
       .selectDropdown(
+        `root_treatments_${i}_treatment_startTreatmentMonth`,
         data.treatments[0].startTreatmentMonth,
       )
       .selectDropdown(
+        `root_treatments_${i}_treatment_startTreatmentDay`,
         data.treatments[0].startTreatmentDay,
       )
       .fill(
+        `input[name="root_treatments_${i}_treatment_startTreatmentYear"]`,
+        data.treatments[0].startTreatmentYear,
       )
       .selectDropdown(
+        `root_treatments_${i}_treatment_endTreatmentMonth`,
         data.treatments[0].endTreatmentMonth,
       )
       .selectDropdown(
+        `root_treatments_${i}_treatment_endTreatmentDay`,
         data.treatments[0].endTreatmentDay,
       )
       .fill(
+        `input[name="root_treatments_${i}_treatment_endTreatmentYear"]`,
+        data.treatments[0].endTreatmentYear,
       )
       .fill(
+        `input[name="root_treatments_${i}_treatment_treatmentCenterName"]`,
+        data.treatments[0].treatmentCenterName,
       );
     if (i < list.length - 1) client.click('.va-growable-add-btn');
   });

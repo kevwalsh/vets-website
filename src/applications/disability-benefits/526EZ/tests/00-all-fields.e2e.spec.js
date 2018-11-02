@@ -95,11 +95,11 @@ const runTest = E2eHelpers.createE2eTest(client => {
   );
 
   // VA Medical Records Intro
-  client.axeCheck('.main').click('.form-panel .usa-button-primary');
-  E2eHelpers.expectNavigateAwayFrom(
-    client,
-    '/supporting-evidence/0/va-medical-records',
-  );
+  // client.axeCheck('.main').click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectNavigateAwayFrom(
+  //   client,
+  //   '/supporting-evidence/0/va-medical-records',
+  // );
 
   // VA Facilities
   // client.axeCheck('.main');
@@ -126,17 +126,14 @@ const runTest = E2eHelpers.createE2eTest(client => {
     '/supporting-evidence/0/private-medical-records',
   );
 
-  // Additional document upload
   // Release
   E2eHelpers.expectLocation(
     client,
-    '/supporting-evidence/0/additionalDocuments',
     '/supporting-evidence/0/private-medical-records-release',
   );
   client.axeCheck('.main');
   PageHelpers.completeRecordReleaseInformation(client, testData.data);
   client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-summary');
   E2eHelpers.expectNavigateAwayFrom(
     client,
     '/supporting-evidence/0/private-medical-records-release',
@@ -151,51 +148,68 @@ const runTest = E2eHelpers.createE2eTest(client => {
     '/supporting-evidence/0/evidence-summary',
   );
 
+  // Record upload
+  // E2eHelpers.expectLocation(client, '/supporting-evidence/0/documents');
+  // client.axeCheck('.main');
+  // client.click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectLocation(
+  //   client,
+  //   '/supporting-evidence/0/additionalDocuments',
+  // );
+
+  // Additional document upload
+  // E2eHelpers.expectLocation(
+  //   client,
+  //   '/supporting-evidence/0/additionalDocuments',
+  // );
+  // client.axeCheck('.main');
+  // client.click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectLocation(client, '/supporting-evidence/0/evidence-summary');
 
   // Second Disability Evidence Type
-  E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-type');
-  client.axeCheck('.main');
-  client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-summary');
+  // E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-type');
+  // client.axeCheck('.main');
+  // client.click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-summary');
 
   // Second Evidence Summary
-  E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-summary');
-  client.axeCheck('.main');
-  client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectLocation(client, '/chapter-five/page-one');
+  // E2eHelpers.expectLocation(client, '/supporting-evidence/1/evidence-summary');
+  // client.axeCheck('.main');
+  // client.click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectLocation(client, '/chapter-five/page-one');
 
   // chapter 5 page 1
-  E2eHelpers.expectLocation(client, '/chapter-five/page-one');
-  client.axeCheck('.main');
-  client.click('.form-panel .usa-button-primary');
-  E2eHelpers.expectNavigateAwayFrom(client, '/chapter-five/page-one');
+  // E2eHelpers.expectLocation(client, '/chapter-five/page-one');
+  // client.axeCheck('.main');
+  // client.click('.form-panel .usa-button-primary');
+  // E2eHelpers.expectNavigateAwayFrom(client, '/chapter-five/page-one');
 
   // Review and Submit Page.
-  client.waitForElementVisible(
-    'label[name="privacyAgreementAccepted-label"]',
-    Timeouts.slow,
-  );
-  client.assert.cssClassPresent(
-    '.progress-bar-segmented div.progress-segment:nth-child(4)',
-    'progress-segment-complete',
-  );
-  client.axeCheck('.main');
+  // client.waitForElementVisible(
+  //   'label[name="privacyAgreementAccepted-label"]',
+  //   Timeouts.slow,
+  // );
+  // client.assert.cssClassPresent(
+  //   '.progress-bar-segmented div.progress-segment:nth-child(4)',
+  //   'progress-segment-complete',
+  // );
+  // client.axeCheck('.main');
 
   // Accept privacy agreement
-  client.click('input[type="checkbox"]');
-  client.click('.form-progress-buttons .usa-button-primary');
-  E2eHelpers.expectNavigateAwayFrom(client, '/review-and-submit');
-  client.expect
-    .element('.js-test-location')
-    .attribute('data-location')
-    .to.not.contain('/review-and-submit')
-    .before(Timeouts.slow);
+  // client.click('input[type="checkbox"]');
+  // client.click('.form-progress-buttons .usa-button-primary');
+  // E2eHelpers.expectNavigateAwayFrom(client, '/review-and-submit');
+  // client.expect
+  //   .element('.js-test-location')
+  //   .attribute('data-location')
+  //   .to.not.contain('/review-and-submit')
+  //   .before(Timeouts.slow);
 
   // Submit message
-  client.waitForElementVisible(
-    '.schemaform-confirmation-section-header',
-    Timeouts.normal,
-  );
+  // client.waitForElementVisible(
+  //   '.schemaform-confirmation-section-header',
+  //   Timeouts.normal,
+  // );
 
   client.axeCheck('.main');
   client.end();
