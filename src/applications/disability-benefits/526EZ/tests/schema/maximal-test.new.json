@@ -57,6 +57,34 @@
     "view:militaryHistoryNote": {},
     "disabilities": [
       {
+        "providerFacility": [
+          {
+            "providerFacilityName": "Sesame Street Clinic",
+            "treatmentDateRange": {
+              "from": "2000-01-01",
+              "to": "2018-01-01"
+            },
+            "providerFacilityAddress": {
+              "street": "123 Sesame St.",
+              "city": "Philidelphia",
+              "postalCode": "10203",
+              "country": "USA",
+              "state": "PA"
+            }
+          }
+        ],
+        "view:limitedConsent": true,
+        "limitedConsent": "Only Dibeetus",
+        "view:privateRecordsChoiceHelp": {},
+        "view:uploadPrivateRecords": "no",
+        "view:patientAcknowledgement": {
+          "view:acknowledgement": true
+        },
+        "view:hasEvidence": true,
+        "view:selectableEvidenceTypes": {
+          "view:privateMedicalRecords": true
+        },
+        "view:evidenceTypeHelp": {},
         "name": "Diabetes mellitus0",
         "ratedDisabilityId": "0",
         "ratingDecisionId": "63655",
@@ -64,7 +92,8 @@
         "decisionCode": "SVCCONNCTED",
         "decisionText": "Service Connected",
         "ratingPercentage": 100,
-        "disabilityActionType": "INCREASE"
+        "disabilityActionType": "INCREASE",
+        "view:selected": true
       },
       {
         "name": "Diabetes mellitus1",
@@ -79,6 +108,7 @@
     ],
     "view:disabilitiesClarification": {},
     "standardClaim": false,
-    "view:fdcWarning": {}
+    "view:fdcWarning": {},
+    "privacyAgreementAccepted": true
   }
 }
