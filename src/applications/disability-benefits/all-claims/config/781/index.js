@@ -1,4 +1,5 @@
 // All Schemas will be dynamically generated based off of current iteration
+// These will be set up within our pages, placed here for simplicity for now.
 const uiSchema = index => ({
   'ui:title': 'Unemployability Status',
   [`view:unemployabilityStatus${index}`]: {
