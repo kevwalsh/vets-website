@@ -60,6 +60,8 @@ import {
   unemployabilityFormIntro,
 } from '../pages';
 
+import { formFlow781 } from './781';
+
 import { PTSD } from '../constants';
 
 import fullSchema from './schema';
@@ -156,6 +158,8 @@ const formConfig = {
           uiSchema: { 'ui:description': disabilitiesOrientation },
           schema: { type: 'object', properties: {} },
         },
+        ...formFlow781(1),
+        ...formFlow781(2),
         ratedDisabilities: {
           title: 'Existing Conditions (Rated Disabilities)',
           path: 'disabilities/rated-disabilities',
