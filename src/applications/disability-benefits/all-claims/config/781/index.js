@@ -1,3 +1,4 @@
+// All Schemas will be dynamically generated based off of current iteration
 const uiSchema = index => ({
   'ui:title': 'Unemployability Status',
   [`view:unemployabilityStatus${index}`]: {
@@ -17,6 +18,7 @@ const schema = index => ({
   },
 });
 
+// We can setup a dynamic depends function here to check against which iteration we are on.
 function hasRatedDisabilities(formData, index) {
   console.log(formData, index);
   return true;
@@ -24,6 +26,7 @@ function hasRatedDisabilities(formData, index) {
 
 export function formFlow781(index) {
   return {
+    // Each page config for 781 will be dumped in here and iterated through.
     [`ratedDisabilities${index}`]: {
       title: 'Existing Conditions (Rated Disabilities) ',
       path: `disabilities/rated-disabilities-${index}`,
