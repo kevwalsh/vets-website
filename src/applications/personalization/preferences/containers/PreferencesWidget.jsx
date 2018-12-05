@@ -10,7 +10,11 @@ import environment from 'platform/utilities/environment';
 
 import PreferenceList from '../components/PreferenceList';
 
-import { setPreference, savePreferences, fetchPreferences } from '../actions';
+import {
+  setPreference,
+  savePreferences,
+  fetchUserPreferences,
+} from '../actions';
 import { benefitChoices } from '../helpers';
 
 const BenefitAlert = ({ alert: Alert }) => <Alert />;
@@ -23,6 +27,8 @@ class PreferencesWidget extends React.Component {
   }
 
   componentWillMount() {
+    console.log(`component will mount!`);
+    this.props.fetchUserPreferences();
     const savedRecently = moment().isBefore(
       this.props.preferences.savedAt + 5000,
     );
@@ -145,7 +151,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setPreference,
   savePreferences,
-  fetchPreferences,
+  fetchUserPreferences,
 };
 
 export default connect(

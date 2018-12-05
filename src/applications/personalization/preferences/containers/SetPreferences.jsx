@@ -31,6 +31,7 @@ class SetPreferences extends React.Component {
             help you get started.
           </p>
           <div className="preferences-grid">
+          {/* this will map over the preferences from the BE and merge with data from benefitsChoices */}
             {benefitChoices.map((item, itemIndex) => (
               <PreferenceOption
                 key={itemIndex}

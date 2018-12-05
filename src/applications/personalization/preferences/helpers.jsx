@@ -245,3 +245,26 @@ export const benefitChoices = [
     faqComponent: healthFAQ,
   },
 ];
+
+export const sampleUserPrefResponse = {
+  data: {
+    attributes: {
+      userPreferences: [
+        {
+          code: 'benefits',
+          title: 'benefits',
+          userPreferences: [
+            {
+              code: 'health-care',
+              description: 'health care',
+            },
+            {
+              code: 'disability',
+              description: 'disability',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
