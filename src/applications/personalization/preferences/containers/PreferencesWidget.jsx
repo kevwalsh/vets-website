@@ -27,7 +27,6 @@ class PreferencesWidget extends React.Component {
   }
 
   componentWillMount() {
-    console.log(`component will mount!`);
     this.props.fetchUserPreferences();
     const savedRecently = moment().isBefore(
       this.props.preferences.savedAt + 5000,
@@ -73,7 +72,7 @@ class PreferencesWidget extends React.Component {
 
   render() {
     const {
-      preferences: { dashboard },
+      preferences: { dashboard, loadingState },
     } = this.props;
     const { savedMessage } = this.state;
     // do not show in production
@@ -93,6 +92,7 @@ class PreferencesWidget extends React.Component {
         <div className="small-12 columns">
           <div className="title-container">
             <h2>Find VA Benefits</h2>
+            {}
             {hasSelectedBenefits && (
               <Link
                 className="usa-button usa-button-secondary"

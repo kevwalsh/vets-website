@@ -15,7 +15,6 @@ const initialState = {
 export default function preferences(state = initialState, action) {
   switch (action.type) {
     case SET_USER_PREFERENCE_LOADING_STATUS: {
-      console.log(`setting the loading status to: ${action.status}`);
       return _.set(`loadingStatus`, action.status, state);
     }
     case SET_DASHBOARD_USER_PREFERENCES: {

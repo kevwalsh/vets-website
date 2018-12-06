@@ -11,7 +11,6 @@ export const DASHBOARD_PREFERENCES_FETCHED = 'DASHBOARD_PREFERENCES_FETCHED';
 
 // load the user preferences
 export function fetchUserPreferences() {
-  console.log(`fetching user prefs...`);
   return dispatch => {
     // and immediately dispatches an action to set the state as PENDING (ie:
     // loading)
@@ -23,14 +22,13 @@ export function fetchUserPreferences() {
     // return apiRequest('/user/preferences')
     return Promise.resolve(sampleUserPrefResponse)
       .then(response => {
-        console.log(response.data.attributes.userPreferences);
-        // const availability = response.data.attributes.isAvailable;
-        // const uptimeRemaining =
-        // response.data.attributes.uptimeRemaining || null;
+        const selectedBenefits = response.data.attributes.userPreferences
+          .anyOf(preferenceGroup => preferenceGroup.code === 'benefits')
+          .userPreferences.map(pref => pref.code);
 
         dispatch({
           type: SET_DASHBOARD_USER_PREFERENCES,
-          preferences: ['one', 'two'],
+          preferences: selectedBenefits,
         });
 
         dispatch({
