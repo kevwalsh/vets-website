@@ -32,7 +32,7 @@ export function fetchUserSelectedBenefits() {
             const selectedBenefits = response.data.attributes.userPreferences
               .filter(preferenceGroup => preferenceGroup.code === 'benefits')
               .pop()
-              .userPreferences.map(pref => pref.code);
+              .userPreferences.map(pref => ({ [pref.code]: true }));
 
             dispatch({
               type: SET_DASHBOARD_USER_PREFERENCES,

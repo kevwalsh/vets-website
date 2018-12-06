@@ -7,9 +7,17 @@ import LoadingButton from '../../profile360/vet360/components/base/LoadingButton
 import PreferenceOption from '../components/PreferenceOption';
 import { benefitChoices } from '../helpers';
 
-import { setPreference, savePreferences, fetchPreferences } from '../actions';
+import {
+  setPreference,
+  savePreferences,
+  fetchAvailableBenefits,
+} from '../actions';
 
 class SetPreferences extends React.Component {
+  componentWillMount() {
+    this.props.fetchAvailableBenefits();
+  }
+
   handleSave = () => {
     this.props.savePreferences(this.props.preferences.dashboard);
     this.props.router.push('/');
@@ -20,7 +28,7 @@ class SetPreferences extends React.Component {
   };
 
   render() {
-    const isLoading = this.props.isLoading;
+    const isSaving = this.props.isSaving;
     return (
       <div className="row user-profile-row">
         <div className="small-12 columns">
@@ -31,7 +39,7 @@ class SetPreferences extends React.Component {
             help you get started.
           </p>
           <div className="preferences-grid">
-          {/* this will map over the preferences from the BE and merge with data from benefitsChoices */}
+            {/* this will map over the preferences from the BE and merge with data from benefitsChoices */}
             {benefitChoices.map((item, itemIndex) => (
               <PreferenceOption
                 key={itemIndex}
@@ -42,7 +50,7 @@ class SetPreferences extends React.Component {
             ))}
           </div>
           <div>
-            <LoadingButton isLoading={isLoading} onClick={this.handleSave}>
+            <LoadingButton isLoading={isSaving} onClick={this.handleSave}>
               <span>Save Preferences</span>
             </LoadingButton>
             <Link to="/" className="usa-button usa-button-secondary">
@@ -62,7 +70,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setPreference,
   savePreferences,
-  fetchPreferences,
+  fetchAvailableBenefits,
 };
 
 export default withRouter(

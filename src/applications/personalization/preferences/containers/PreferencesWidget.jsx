@@ -73,7 +73,7 @@ class PreferencesWidget extends React.Component {
 
   renderContent(loadingStatus, dashboard) {
     const selectedBenefits = benefitChoices.filter(item =>
-      dashboard.includes(item.slug),
+      dashboard.find(benefit => Object.keys(benefit).includes(item.slug)),
     );
     const hasSelectedBenefits = !!selectedBenefits.length;
     const selectedBenefitAlerts = selectedBenefits
@@ -81,7 +81,7 @@ class PreferencesWidget extends React.Component {
       .map(item => item.alert);
 
     if (loadingStatus === 'loading') {
-      return <LoadingIndicator message={`Loading your selections...`} />;
+      return <LoadingIndicator message={'Loading your selections...'} />;
     }
     if (loadingStatus === 'error') {
       return (
@@ -123,6 +123,7 @@ class PreferencesWidget extends React.Component {
         return content;
       }
     }
+    return null;
   }
 
   render() {
