@@ -73,7 +73,7 @@ class PreferencesWidget extends React.Component {
 
   renderContent(loadingStatus, dashboard) {
     const selectedBenefits = benefitChoices.filter(item =>
-      dashboard.find(benefit => Object.keys(benefit).includes(item.slug)),
+      dashboard.find(benefit => Object.keys(benefit).includes(item.code)),
     );
     const hasSelectedBenefits = !!selectedBenefits.length;
     const selectedBenefitAlerts = selectedBenefits
