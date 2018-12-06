@@ -5,6 +5,7 @@ import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import moment from 'moment';
 
 import AlertBox from '@department-of-veterans-affairs/formation/AlertBox';
+import LoadingIndicator from '@department-of-veterans-affairs/formation/LoadingIndicator';
 
 import environment from 'platform/utilities/environment';
 
@@ -13,7 +14,7 @@ import PreferenceList from '../components/PreferenceList';
 import {
   setPreference,
   savePreferences,
-  fetchUserPreferences,
+  fetchUserSelectedBenefits,
 } from '../actions';
 import { benefitChoices } from '../helpers';
 
@@ -27,7 +28,7 @@ class PreferencesWidget extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchUserPreferences();
+    this.props.fetchUserSelectedBenefits();
     const savedRecently = moment().isBefore(
       this.props.preferences.savedAt + 5000,
     );
@@ -70,19 +71,18 @@ class PreferencesWidget extends React.Component {
     });
   };
 
+  renderContent(loadingStatus, dashboard) {}
+
   render() {
-    const {
-      preferences: { dashboard, loadingState },
-    } = this.props;
-    // console.log(loadingState);
-    // console.log(dashboard);
-    const { savedMessage } = this.state;
     // do not show in production
     if (environment.isProduction()) {
       return null;
     }
+    const {
+      preferences: { dashboard, loadingStatus },
+    } = this.props;
+    const { savedMessage } = this.state;
     const selectedBenefits = benefitChoices.filter(item =>
-      // this.props.preferences.dashboard.includes(item.slug),
       dashboard.includes(item.slug),
     );
     const hasSelectedBenefits = !!selectedBenefits.length;
@@ -95,15 +95,15 @@ class PreferencesWidget extends React.Component {
         <div className="small-12 columns">
           <div className="title-container">
             <h2>Find VA Benefits</h2>
-            {}
-            {hasSelectedBenefits && (
-              <Link
-                className="usa-button usa-button-secondary"
-                to="preferences"
-              >
-                Find VA Benefits
-              </Link>
-            )}
+            {loadingStatus !== 'loading' &&
+              hasSelectedBenefits && (
+                <Link
+                  className="usa-button usa-button-secondary"
+                  to="preferences"
+                >
+                  Find VA Benefits
+                </Link>
+              )}
           </div>
           <ReactCSSTransitionGroup
             transitionName="form-expanding-group-inner"
@@ -119,6 +119,9 @@ class PreferencesWidget extends React.Component {
               />
             )}
           </ReactCSSTransitionGroup>
+          {loadingStatus === 'loading' && (
+            <LoadingIndicator message={`Loading your selections...`} />
+          )}
           {!hasSelectedBenefits && (
             <div>
               <p>You haven’t selected any benefits to learn about.</p>
@@ -154,7 +157,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setPreference,
   savePreferences,
-  fetchUserPreferences,
+  fetchUserSelectedBenefits,
 };
 
 export default connect(

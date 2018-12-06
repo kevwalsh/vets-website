@@ -268,3 +268,72 @@ export const sampleUserPrefResponse = {
     },
   },
 };
+
+export const sampleAllPrefOptionsResponse = {
+  data: {
+    attributes: {
+      preferences: [
+        {
+          code: 'benefits',
+          title: 'benefits',
+          preferenceChoices: [
+            {
+              code: 'health-care',
+              description: 'health care',
+            },
+            {
+              code: 'disability',
+              description: 'disability',
+            },
+            {
+              code: 'appeals',
+              description: 'appeals',
+            },
+            {
+              code: 'education-training',
+              description: 'education and training',
+            },
+            {
+              code: 'careers-employment',
+              description: 'careers and employment',
+            },
+            {
+              code: 'pension',
+              description: 'pensions',
+            },
+            {
+              code: 'housing-assistance',
+              description: 'housing assistance',
+            },
+            {
+              code: 'life-insurance',
+              description: 'life insurance',
+            },
+            {
+              code: 'burials-memorials',
+              description: 'burials memorials',
+            },
+            {
+              code: 'family-caregiver-benefits',
+              description: 'family caregiver benefits',
+            },
+          ],
+        },
+        {
+          code: 'some-other-preference',
+          title: 'some other preference',
+          preferenceChoices: [
+            {
+              code: 'some-choice',
+              description: 'some choice',
+            },
+            {
+              code: 'something',
+              description: 'something',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};

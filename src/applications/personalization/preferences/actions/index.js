@@ -1,54 +1,95 @@
 import localStorage from 'platform/utilities/storage/localStorage';
-import { sampleUserPrefResponse } from '../helpers';
+import {
+  sampleUserPrefResponse,
+  sampleAllPrefOptionsResponse,
+} from '../helpers';
 
 export const SET_USER_PREFERENCE_LOADING_STATUS =
   'SET_USER_PREFERENCE_LOADING_STATUS';
+export const SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS =
+  'SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS';
+export const SET_AVAILABLE_BENEFITS = 'SET_AVAILABLE_BENEFITS';
 export const SET_DASHBOARD_USER_PREFERENCES = 'SET_DASHBOARD_USER_PREFERENCES';
 export const DASHBOARD_PREFERENCE_STATUS = 'DASHBOARD_PREFERENCE_STATUS';
 export const DASHBOARD_PREFERENCE_SET = 'DASHBOARD_PREFERENCE_SET';
 export const DASHBOARD_PREFERENCES_SAVED = 'DASHBOARD_PREFERENCES_SAVED';
 export const DASHBOARD_PREFERENCES_FETCHED = 'DASHBOARD_PREFERENCES_FETCHED';
 
-// load the user preferences
-export function fetchUserPreferences() {
+// load the benefits the user has picked to learn more about
+export function fetchUserSelectedBenefits() {
   return dispatch => {
-    // and immediately dispatches an action to set the state as PENDING (ie:
-    // loading)
     dispatch({
       type: SET_USER_PREFERENCE_LOADING_STATUS,
       status: 'loading',
     });
 
-    // return apiRequest('/user/preferences')
-    return Promise.resolve(sampleUserPrefResponse)
+    setTimeout(
+      () =>
+        // return apiRequest('/user/preferences')
+        Promise.resolve(sampleUserPrefResponse)
+          .then(response => {
+            // We just want to get an array of Benefits preferences
+            const selectedBenefits = response.data.attributes.userPreferences
+              .filter(preferenceGroup => preferenceGroup.code === 'benefits')
+              .pop()
+              .userPreferences.map(pref => pref.code);
+
+            dispatch({
+              type: SET_DASHBOARD_USER_PREFERENCES,
+              preferences: selectedBenefits,
+            });
+
+            dispatch({
+              type: SET_USER_PREFERENCE_LOADING_STATUS,
+              status: 'loaded',
+            });
+          })
+          .catch(() => {
+            dispatch({
+              type: SET_USER_PREFERENCE_LOADING_STATUS,
+              status: 'error',
+            });
+          }),
+      4000,
+    );
+  };
+}
+
+// load all available benefits
+export function fetchAvailableBenefits() {
+  return dispatch => {
+    dispatch({
+      type: SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS,
+      status: 'loading',
+    });
+
+    // return apiRequest('/user/preferences/choices')
+    return Promise.resolve(sampleAllPrefOptionsResponse)
       .then(response => {
         // We just want to get an array of Benefits preferences
-        const selectedBenefits = response.data.attributes.userPreferences
+        const availableBenefits = response.data.attributes.preferences
           .filter(preferenceGroup => preferenceGroup.code === 'benefits')
           .pop()
-          .userPreferences.map(pref => pref.code);
+          .preferenceChoices.map(pref => pref.code);
 
         dispatch({
-          type: SET_DASHBOARD_USER_PREFERENCES,
-          preferences: selectedBenefits,
+          type: SET_AVAILABLE_BENEFITS,
+          preferences: availableBenefits,
         });
 
         dispatch({
-          type: SET_USER_PREFERENCE_LOADING_STATUS,
+          type: SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS,
           status: 'loaded',
         });
       })
       .catch(() => {
         dispatch({
-          type: SET_USER_PREFERENCE_LOADING_STATUS,
+          type: SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS,
           status: 'error',
         });
       });
   };
 }
-
-// load all available preferences
-export function fetchAvailablePreferences() {}
 
 export function fetchPreferences() {
   const savedPrefs = localStorage.getItem('dashboard-preferences');
