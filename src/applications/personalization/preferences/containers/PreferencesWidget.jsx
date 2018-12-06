@@ -71,7 +71,59 @@ class PreferencesWidget extends React.Component {
     });
   };
 
-  renderContent(loadingStatus, dashboard) {}
+  renderContent(loadingStatus, dashboard) {
+    const selectedBenefits = benefitChoices.filter(item =>
+      dashboard.includes(item.slug),
+    );
+    const hasSelectedBenefits = !!selectedBenefits.length;
+    const selectedBenefitAlerts = selectedBenefits
+      .filter(item => !!item.alert)
+      .map(item => item.alert);
+
+    if (loadingStatus === 'loading') {
+      return <LoadingIndicator message={`Loading your selections...`} />;
+    }
+    if (loadingStatus === 'error') {
+      return (
+        <AlertBox
+          status="error"
+          headline="We can’t show your selected benefit information right now"
+          content="We’re sorry. Something went wrong on our end, and we can’t show you information about the benefits you chose. Please check back later."
+        />
+      );
+    }
+    if (loadingStatus === 'loaded') {
+      if (!hasSelectedBenefits) {
+        return (
+          <div>
+            <p>You haven’t selected any benefits to learn about.</p>
+            <Link to="preferences">Select benefits now</Link>
+          </div>
+        );
+      }
+      if (hasSelectedBenefits) {
+        const content = [
+          <PreferenceList
+            key="preference-list"
+            benefits={selectedBenefits}
+            view={this.state}
+            handleViewToggle={this.handleViewToggle}
+            handleRemove={this.handleRemove}
+          />,
+        ];
+        if (selectedBenefitAlerts.length) {
+          content.unshift(
+            <div key="benefit-alerts">
+              {selectedBenefitAlerts.map((alert, index) => (
+                <BenefitAlert alert={alert} key={index} />
+              ))}
+            </div>,
+          );
+        }
+        return content;
+      }
+    }
+  }
 
   render() {
     // do not show in production
@@ -82,28 +134,20 @@ class PreferencesWidget extends React.Component {
       preferences: { dashboard, loadingStatus },
     } = this.props;
     const { savedMessage } = this.state;
-    const selectedBenefits = benefitChoices.filter(item =>
-      dashboard.includes(item.slug),
-    );
-    const hasSelectedBenefits = !!selectedBenefits.length;
-    const selectedBenefitAlerts = selectedBenefits
-      .filter(item => !!item.alert)
-      .map(item => item.alert);
 
     return (
       <div className="row user-profile-row">
         <div className="small-12 columns">
           <div className="title-container">
             <h2>Find VA Benefits</h2>
-            {loadingStatus !== 'loading' &&
-              hasSelectedBenefits && (
-                <Link
-                  className="usa-button usa-button-secondary"
-                  to="preferences"
-                >
-                  Find VA Benefits
-                </Link>
-              )}
+            {loadingStatus !== 'loading' && (
+              <Link
+                className="usa-button usa-button-secondary"
+                to="preferences"
+              >
+                Find VA Benefits
+              </Link>
+            )}
           </div>
           <ReactCSSTransitionGroup
             transitionName="form-expanding-group-inner"
@@ -119,30 +163,7 @@ class PreferencesWidget extends React.Component {
               />
             )}
           </ReactCSSTransitionGroup>
-          {loadingStatus === 'loading' && (
-            <LoadingIndicator message={`Loading your selections...`} />
-          )}
-          {!hasSelectedBenefits && (
-            <div>
-              <p>You haven’t selected any benefits to learn about.</p>
-              <Link to="preferences">Select benefits now</Link>
-            </div>
-          )}
-          {selectedBenefitAlerts.length > 0 && (
-            <div>
-              {selectedBenefitAlerts.map((alert, index) => (
-                <BenefitAlert alert={alert} key={index} />
-              ))}
-            </div>
-          )}
-          {hasSelectedBenefits && (
-            <PreferenceList
-              benefits={selectedBenefits}
-              view={this.state}
-              handleViewToggle={this.handleViewToggle}
-              handleRemove={this.handleRemove}
-            />
-          )}
+          {this.renderContent(loadingStatus, dashboard)}
         </div>
       </div>
     );
