@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
+import get from 'platform/utilities/data/get';
 import LoadingButton from '../../profile360/vet360/components/base/LoadingButton';
 
 import PreferenceOption from '../components/PreferenceOption';
@@ -27,7 +28,27 @@ class SetPreferences extends React.Component {
     this.props.setPreference(slug, !this.props.preferences.dashboard[slug]);
   };
 
+  // hydrate benefit options from the backend with data from the benefitChoices
+  // helper array
+  hydrateBenefits = benefits =>
+    benefits.map(benefit => {
+      const hydratedBenefit = { ...benefit };
+      const helperData = benefitChoices.find(
+        choice => choice.code === benefit.code,
+      );
+      hydratedBenefit.title = get('title', helperData, benefit.description);
+      hydratedBenefit.description = get(
+        'description',
+        helperData,
+        benefit.description,
+      );
+      return hydratedBenefit;
+    });
+
   render() {
+    const availableBenefits = this.hydrateBenefits(
+      this.props.preferences.availableBenefits,
+    );
     const isSaving = this.props.isSaving;
     return (
       <div className="row user-profile-row">
@@ -39,13 +60,12 @@ class SetPreferences extends React.Component {
             help you get started.
           </p>
           <div className="preferences-grid">
-            {/* this will map over the preferences from the BE and merge with data from benefitsChoices */}
-            {benefitChoices.map((item, itemIndex) => (
+            {availableBenefits.map((benefit, benefitIndex) => (
               <PreferenceOption
-                key={itemIndex}
-                item={item}
+                key={benefitIndex}
+                item={benefit}
                 onChange={this.handlePreferenceToggle}
-                checked={!!this.props.preferences.dashboard[item.slug]}
+                checked={!!this.props.preferences.dashboard[benefit.slug]}
               />
             ))}
           </div>
