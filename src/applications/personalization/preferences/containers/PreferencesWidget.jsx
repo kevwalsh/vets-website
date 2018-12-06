@@ -132,7 +132,7 @@ class PreferencesWidget extends React.Component {
       return null;
     }
     const {
-      preferences: { dashboard, loadingStatus },
+      preferences: { dashboard, userBenefitsLoadingStatus },
     } = this.props;
     const { savedMessage } = this.state;
 
@@ -141,7 +141,7 @@ class PreferencesWidget extends React.Component {
         <div className="small-12 columns">
           <div className="title-container">
             <h2>Find VA Benefits</h2>
-            {loadingStatus !== 'loading' && (
+            {userBenefitsLoadingStatus !== 'loading' && (
               <Link
                 className="usa-button usa-button-secondary"
                 to="preferences"
@@ -164,7 +164,7 @@ class PreferencesWidget extends React.Component {
               />
             )}
           </ReactCSSTransitionGroup>
-          {this.renderContent(loadingStatus, dashboard)}
+          {this.renderContent(userBenefitsLoadingStatus, dashboard)}
         </div>
       </div>
     );

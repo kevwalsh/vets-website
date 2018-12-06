@@ -12,12 +12,19 @@ import {
 
 const initialState = {
   dashboard: [],
+  availableBenefits: [],
 };
 
 export default function preferences(state = initialState, action) {
   switch (action.type) {
     case SET_USER_PREFERENCE_LOADING_STATUS: {
-      return _.set(`loadingStatus`, action.status, state);
+      return _.set(`userBenefitsLoadingStatus`, action.status, state);
+    }
+    case SET_ALL_PREFERENCE_OPTIONS_LOADING_STATUS: {
+      return _.set(`allBenefitsLoadingStatus`, action.status, state);
+    }
+    case SET_AVAILABLE_BENEFITS: {
+      return _.set(`availableBenefits`, action.preferences, state);
     }
     case SET_DASHBOARD_USER_PREFERENCES: {
       return _.set(`dashboard`, action.preferences, state);

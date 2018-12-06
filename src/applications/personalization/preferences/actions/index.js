@@ -1,7 +1,7 @@
 import localStorage from 'platform/utilities/storage/localStorage';
 import {
   sampleUserPrefResponse,
-  sampleAllPrefOptionsResponse,
+  sampleAllBenefitOptionsResponse,
 } from '../helpers';
 
 export const SET_USER_PREFERENCE_LOADING_STATUS =
@@ -50,7 +50,7 @@ export function fetchUserSelectedBenefits() {
               status: 'error',
             });
           }),
-      4000,
+      3000,
     );
   };
 }
@@ -63,14 +63,10 @@ export function fetchAvailableBenefits() {
       status: 'loading',
     });
 
-    // return apiRequest('/user/preferences/choices')
-    return Promise.resolve(sampleAllPrefOptionsResponse)
+    // return apiRequest('/user/preferences/choices/benefits')
+    return Promise.resolve(sampleAllBenefitOptionsResponse)
       .then(response => {
-        // We just want to get an array of Benefits preferences
-        const availableBenefits = response.data.attributes.preferences
-          .filter(preferenceGroup => preferenceGroup.code === 'benefits')
-          .pop()
-          .preferenceChoices.map(pref => pref.code);
+        const availableBenefits = response.data.attributes.preferenceChoices;
 
         dispatch({
           type: SET_AVAILABLE_BENEFITS,
