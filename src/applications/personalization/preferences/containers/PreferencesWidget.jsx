@@ -74,13 +74,16 @@ class PreferencesWidget extends React.Component {
     const {
       preferences: { dashboard, loadingState },
     } = this.props;
+    // console.log(loadingState);
+    // console.log(dashboard);
     const { savedMessage } = this.state;
     // do not show in production
     if (environment.isProduction()) {
       return null;
     }
-    const selectedBenefits = benefitChoices.filter(
-      item => !!dashboard[item.slug],
+    const selectedBenefits = benefitChoices.filter(item =>
+      // this.props.preferences.dashboard.includes(item.slug),
+      dashboard.includes(item.slug),
     );
     const hasSelectedBenefits = !!selectedBenefits.length;
     const selectedBenefitAlerts = selectedBenefits

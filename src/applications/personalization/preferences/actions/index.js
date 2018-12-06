@@ -22,8 +22,10 @@ export function fetchUserPreferences() {
     // return apiRequest('/user/preferences')
     return Promise.resolve(sampleUserPrefResponse)
       .then(response => {
+        // We just want to get an array of Benefits preferences
         const selectedBenefits = response.data.attributes.userPreferences
-          .anyOf(preferenceGroup => preferenceGroup.code === 'benefits')
+          .filter(preferenceGroup => preferenceGroup.code === 'benefits')
+          .pop()
           .userPreferences.map(pref => pref.code);
 
         dispatch({

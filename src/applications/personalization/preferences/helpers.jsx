@@ -132,7 +132,7 @@ export const benefitChoices = [
   {
     title: 'Health Care',
     description: 'Get health care coverage.',
-    slug: 'healthcare',
+    slug: 'health-care',
     introduction:
       'With VA health care, you’re covered for regular checkups with your primary care provider and appointments with specialists (like cardiologists, gynecologists, and mental health providers). You can access Veterans health care services like home health and geriatric (elder) care, and you can get medical equipment, prosthetics, and prescriptions.',
     ctaLink: '/health-care',

@@ -9,7 +9,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  dashboard: {},
+  dashboard: [],
 };
 
 export default function preferences(state = initialState, action) {
